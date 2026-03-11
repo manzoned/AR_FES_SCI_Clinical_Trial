@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="wordtest" size="0.240000 0.076647" />
+    <ImageTarget name="g16" size="0.050000 0.021357" />
+    <ImageTarget name="g3" size="0.050000 0.032487" />
+    <ImageTarget name="test2" size="0.100000 0.101879" />
+    <ImageTarget name="test" size="0.140000 0.199209" />
+    <ImageTarget name="biketest" size="0.075000 0.074211" />
+    <ImageTarget name="basketballtest" size="0.075000 0.075789" />
+    <ImageTarget name="underarmour" size="0.105000 0.075789" />
+    <ImageTarget name="niketest" size="0.076200 0.065088" />
+    <ImageTarget name="rainbowtest" size="0.157000 0.089865" />
+    <CylinderTarget name="WordTestCylinder3" sideLength="0.076200"/>
+    <CylinderTarget name="WordTestCylinder2" sideLength="0.076200"/>
+    <CylinderTarget name="WordTestCylinder" sideLength="0.076200"/>
+    <CylinderTarget name="CamoTestCylinder3" sideLength="0.076200"/>
+    <CylinderTarget name="CamoTestCylinder" sideLength="0.076200"/>
+    <CylinderTarget name="CamoTest" sideLength="0.090000"/>
+    <CylinderTarget name="BallCylinder" sideLength="0.090000"/>
+    <CylinderTarget name="WristBand" sideLength="0.090000"/>
+  </Tracking>
+</QCARConfig>

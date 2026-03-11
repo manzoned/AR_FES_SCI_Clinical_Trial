@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VuforiaUnityInfo version="7.0">
+    <TargetSet version="5.0" toolVersion="2.8.0">
+        <CylinderTarget name="WordTestCylinder3" version="3.0" targetId="58aaa47ccc824ae49eed2637f11f81bc" sideLength="0.076200" topDiameter="0.076200" bottomDiameter="0.076200" sideImage="WordTestCylinder3.Body_scaled.jpg"/>
+        <CylinderTarget name="WordTestCylinder2" version="3.0" targetId="1d3940e1a7494f67959469b059cbc646" sideLength="0.076200" topDiameter="0.076200" bottomDiameter="0.076200" sideImage="WordTestCylinder2.Body_scaled.jpg"/>
+        <CylinderTarget name="WordTestCylinder" version="3.0" targetId="97f7f320baaf42c48c539a89058ee236" sideLength="0.076200" topDiameter="0.076200" bottomDiameter="0.076200" sideImage="WordTestCylinder.Body_scaled.jpg"/>
+        <CylinderTarget name="CamoTestCylinder3" version="3.0" targetId="7fe15c4cbea644a5960a477f49eb31ea" sideLength="0.076200" topDiameter="0.076200" bottomDiameter="0.076200" sideImage="CamoTestCylinder3.Body_scaled.jpg"/>
+        <CylinderTarget name="CamoTestCylinder" version="3.0" targetId="4ce7877b343249ddb3528ac2a06095d5" sideLength="0.076200" topDiameter="0.042000" bottomDiameter="0.042000" sideImage="CamoTestCylinder.Body_scaled.jpg"/>
+        <CylinderTarget name="CamoTest" version="3.0" targetId="a4b7bcc3d94e46b6bf379065cfa7ff81" sideLength="0.090000" topDiameter="0.050000" bottomDiameter="0.050000" sideImage="CamoTest.Body_scaled.jpg"/>
+        <CylinderTarget name="BallCylinder" version="3.0" targetId="0a47f620678f4b41a4f1dd199cab0ac7" sideLength="0.090000" topDiameter="0.050000" bottomDiameter="0.050000" sideImage="BallCylinder.Body_scaled.jpg"/>
+        <CylinderTarget name="WristBand" version="3.0" targetId="a1af31b298b44e71871882586425017d" sideLength="0.090000" topDiameter="0.050000" bottomDiameter="0.050000" sideImage="WristBand.Body_scaled.jpg"/>
+    </TargetSet>
+</VuforiaUnityInfo>
