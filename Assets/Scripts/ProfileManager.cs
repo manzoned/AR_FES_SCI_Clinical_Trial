@@ -8,6 +8,7 @@ public class ProfileManager : MonoBehaviour
 {
     public ProfilePrompt ProfilePrompt;
     public TextMeshPro Profile_PromptOutput;
+    public ProfileAmplitudes ProfileAmplitudes;
     public HandUsePrompt HandUsePrompt;
     public DataManager DataManager;
     public string tempProfile;
@@ -15,7 +16,7 @@ public class ProfileManager : MonoBehaviour
     public UserProfile UserProfile;
     public UDPSender UDPSender;
     public bool ProfileSet;
-
+    
 
     [Header("Current Status")]
     public UserProfile activeProfile; // Who is currently logged in?
@@ -114,7 +115,6 @@ public class ProfileManager : MonoBehaviour
         ProfilePrompt.gameObject.SetActive(false);
         LoadProfile(tempProfile);
         DataManager.StartNewSession();
-        HandUsePrompt.gameObject.SetActive(true);
         UDPSender.SendInitialStimAmps();
         ProfileSet = true;
     }
@@ -139,6 +139,15 @@ public class ProfileManager : MonoBehaviour
         HandUsePrompt.gameObject.SetActive(false);
         Profile_PromptOutput.text = "What is your participant ID?";
         Profile_PromptOutput.color = new Color(255, 255, 255, 1f);
+    }
+
+    public void BeginSession()
+    {
+        // after setting amplitudes in myndsearch with guidance from headset need to being session 
+        // open hand prompt and remove amplitude prompts
+        ProfileAmplitudes.gameObject.SetActive(false);
+        HandUsePrompt.gameObject.SetActive(true);
+
     }
 
     public void CancelLogin()

@@ -11,8 +11,7 @@ using Unity.VisualScripting;
 
 public class UDPSender : MonoBehaviour
 {
-    // try to make toggle between using wifi and using serial usb connection
-    // this can be initial question... how do you want to connect (USB or Wireless)
+
     private UdpClient udpClient;
     public ErrorScoreScript_v2 ErrorScoreScript;
     public IP_Prompt IP_Prompt;
@@ -24,6 +23,10 @@ public class UDPSender : MonoBehaviour
     public Finger_off_textbox_target finger_Off_Textbox_Target;
     public Thumb_off_textbox_target thumb_Off_Textbox_Target;
     public Hand_off_textbox_target hand_off_textbox_target;
+    public ProfileAmplitudes ProfileAmplitudes;
+    public TextMeshPro Profile_AmplitudesOutput;
+    public NewAmplitudes NewAmplitudes;
+    public TextMeshPro NewAmplitudesOutput;
     public bool NormalBarFullRange;
     public float[] StimAmps;
     public float[] InitialAmps;
@@ -49,9 +52,15 @@ public class UDPSender : MonoBehaviour
     public Lateral Lateral;
     public ExtensionStimBackPlate ExtensionStimBackPlate;
     public TargetPosturePanel TargetPosturePanel;
-    public string TempString;
+    private string TempString;
+    private string AmpString;
     public int IPState;
-    public bool ExtensionStimState;
+    private bool ExtensionStimState;
+    private bool NewFingerMinState;
+    private bool NewFingerMaxState;
+    private bool NewThumbMinState;
+    private bool NewThumbMaxState;
+    private bool NewOpenState;
     public ConfigManager ConfigManager;
     public StimulationVisualizer StimulationVisualizer;
     public StimulationVisualizerTarget StimulationVisualizerTarget;
@@ -103,6 +112,10 @@ public class UDPSender : MonoBehaviour
     {
         ExternalMachineIP = ExternalMachineIP.Replace(TempString, "");
         IP_PromptOutput.text = "Input Laptop IP address here:" + "\n" + ExternalMachineIP;
+        AmpString = "";
+        TempString = "";
+        SetNewAmplitudesFingerMinValues();
+        SetNewAmplitudesFingerMaxValues();
 
     }
 
@@ -368,11 +381,18 @@ public class UDPSender : MonoBehaviour
 
         //Debug.Log(ProfileManager.activeProfile.finger_min);
 
+        // retrieve amplitude information from profile (initially added by experimenter manually)
         InitialAmps[0] = ProfileManager.activeProfile.finger_min;
         InitialAmps[1] = ProfileManager.activeProfile.finger_max;
         InitialAmps[2] = ProfileManager.activeProfile.thumb_min;
         InitialAmps[3] = ProfileManager.activeProfile.thumb_max;
         InitialAmps[4] = ProfileManager.activeProfile.open_max;
+
+        string FingerMinString = ProfileManager.activeProfile.finger_min.ToString();
+        string FingerMaxString = ProfileManager.activeProfile.finger_max.ToString();
+        string ThumbMinString = ProfileManager.activeProfile.thumb_min.ToString();
+        string ThumbMaxString = ProfileManager.activeProfile.thumb_max.ToString();
+        string OpenMaxString = ProfileManager.activeProfile.open_max.ToString();
 
         normal_finger_min = InitialAmps[0]/InitialAmps[1];
         normal_thumb_min = InitialAmps[2] / InitialAmps[3];
@@ -381,8 +401,19 @@ public class UDPSender : MonoBehaviour
         avgIncrementer = (fingerIncrementer + thumbIncrementer) / 2;
         normal_finger_bar = normal_finger_min;
         normal_thumb_bar = normal_thumb_min;
-            
 
+        // display ampltiude information to participant so they can set it on myndsearch
+        Profile_AmplitudesOutput.text = "Finger Amp Min = " + FingerMinString + "\n" +
+                                       "Finger Amp Max = " + FingerMaxString + "\n" +
+                                       "Thumb Amp Min = " + ThumbMinString + "\n" +
+                                       "Thumb Amp Max = " + ThumbMaxString + "\n" +
+                                       "Open Amp Max = " + OpenMaxString + "\n" +
+                                       "If ampltiude changed say \"New Amplitudes\"" + "\n" +
+                                       "Otherwise, say \"Begin\" to start";
+        Profile_AmplitudesOutput.color = new Color(255, 255, 255, 1f);
+        ProfileAmplitudes.gameObject.SetActive(true);
+       // Profile_PromptOutput.text = "What is your participant ID?";
+        //Profile_PromptOutput.color = new Color(255, 255, 255, 1f);
 
 
 
@@ -410,18 +441,96 @@ public class UDPSender : MonoBehaviour
         Debug.Log("Sent zero command on application quit.");
     }
 
-    public void NumberZero() { TempString = "0"; BuildIPAddress(); }
-    public void NumberOne() { TempString = "1"; BuildIPAddress(); }
-    public void NumberTwo() { TempString = "2"; BuildIPAddress(); }
-    public void NumberThree() { TempString = "3"; BuildIPAddress(); }
-    public void NumberFour() { TempString = "4"; BuildIPAddress(); }
-    public void NumberFive() { TempString = "5"; BuildIPAddress(); }
-    public void NumberSix() { TempString = "6"; BuildIPAddress(); }
-    public void NumberSeven() { TempString = "7"; BuildIPAddress(); }
-    public void NumberEight() { TempString = "8"; BuildIPAddress(); }
-    public void NumberNine() { TempString = "9"; BuildIPAddress(); }
+    public void NumberZero() { TempString = "0"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
+    public void NumberOne() { TempString = "1"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
+    public void NumberTwo() { TempString = "2"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
+    public void NumberThree() { TempString = "3"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
+    public void NumberFour() { TempString = "4"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
+    public void NumberFive() { TempString = "5"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
+    public void NumberSix() { TempString = "6"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
+    public void NumberSeven() { TempString = "7"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
+    public void NumberEight() { TempString = "8"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
+    public void NumberNine() { TempString = "9"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
     public void NumberTen() { TempString = "10"; BuildIPAddress(); }
-    public void Dot() { TempString = "."; BuildIPAddress(); }
+    public void Dot() { TempString = "."; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
+
+    /// <summary>
+    /// This section of the code is only used if the participant needs to change the stimulation amplitudes
+    /// </summary>
+    public void SetNewAmpltiudesFingerMinPrompt()
+    {
+        // first screen when setting new amplitudes
+        NewAmplitudesOutput.text = "What is the new Finger Min Amplitude? (e.g., 1.5)";
+        NewAmplitudesOutput.color = new Color(255, 255, 255, 1f);
+        NewAmplitudes.gameObject.SetActive(true);
+
+        ProfileAmplitudes.gameObject.SetActive(false);
+        AmpString = "";
+        TempString = "";
+
+    }
+
+    public void SetNewAmplitudesFingerMinValues()
+    {
+        if (NewFingerMinState == false)
+        {
+            AmpString = AmpString + TempString;
+            NewAmplitudesOutput.text = "What is the new Finger MIN Amplitude? (e.g., 1.5)" + "\n" + "\n" +
+                                        AmpString + "\n" + "\n" +
+                                        "Say \"confirm\" to move on";
+        }
+        
+
+    }
+
+    public void Confirm_FingerMin()
+    {
+        // send to profile
+        if (NewFingerMinState == false)
+        {
+            ProfileManager.activeProfile.finger_min = float.Parse(AmpString);
+            ProfileManager.Instance.SaveCurrentProfile();
+            NewFingerMinState = true;
+            ResetStrings();
+            SetNewAmplitudesFingerMaxValues();
+        }
 
 
+
+    }
+
+    public void ResetStrings()
+    {
+        AmpString = "";
+        TempString = "";
+    }
+
+    public void SetNewAmplitudesFingerMaxValues()
+    {
+
+        if (NewFingerMaxState == false && NewFingerMinState == true)
+        {
+            Debug.Log("here");
+            AmpString = AmpString + TempString;
+            NewAmplitudesOutput.text = "What is the new Finger MAX Amplitude? (e.g., 1.5)" + "\n" + "\n" +
+                                        AmpString + "\n" + "\n" +
+                                        "Say \"confirm\" to move on";
+        }
+
+    }
+
+    public void Confirm_FingerMax()
+    {
+        // send to profile
+        if (NewFingerMaxState == false && NewFingerMinState == true && AmpString != "")
+        {
+            Debug.Log("here");
+            ProfileManager.activeProfile.finger_max = float.Parse(AmpString);
+            ProfileManager.Instance.SaveCurrentProfile();
+            NewFingerMaxState = true;
+            // call new thumb screen etc etc.
+        }
+
+
+    }
 }

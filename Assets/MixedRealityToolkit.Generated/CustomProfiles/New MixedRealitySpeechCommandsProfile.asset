@@ -235,7 +235,7 @@ MonoBehaviour:
       axisConstraint: 0
   - localizationKey: 
     keyword: Marble
-    keyCode: 98
+    keyCode: 112
     action:
       id: 0
       description: None
@@ -250,34 +250,6 @@ MonoBehaviour:
   - localizationKey: 
     keyword: Right Hand
     keyCode: 281
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Forearm Tracking On
-    keyCode: 0
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Forearm Tracking Off
-    keyCode: 0
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Rotate Left
-    keyCode: 103
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Rotate Right
-    keyCode: 106
     action:
       id: 0
       description: None
@@ -375,7 +347,7 @@ MonoBehaviour:
       axisConstraint: 0
   - localizationKey: 
     keyword: Dot
-    keyCode: 0
+    keyCode: 46
     action:
       id: 0
       description: None
@@ -642,6 +614,27 @@ MonoBehaviour:
   - localizationKey: 
     keyword: Profile Reset
     keyCode: 59
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: New Amplitudes
+    keyCode: 55
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: Begin
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: Confirm
+    keyCode: 56
     action:
       id: 0
       description: None
