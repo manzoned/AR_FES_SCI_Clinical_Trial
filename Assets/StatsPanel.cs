@@ -7,6 +7,9 @@ public class StatsPanel : MonoBehaviour
 {
     public TargetPosturePanel targetPosturePanel;
     public UDPSender UDPSender;
+    public TimerTextBox TimerTextBox;
+    public ProfileManager ProfileManager;
+    public HandTracking1 HandTracking;
 
     [Header("UI Text References (Reused for both modes)")]
     public TextMeshPro TitleText;
@@ -29,13 +32,31 @@ public class StatsPanel : MonoBehaviour
 
     public void ScreenOn()
     {
-        if (UDPSender.StopStimState == true)
+        if(ProfileManager.ProfileSet == true)
         {
-            gameObject.SetActive(true);
-            targetPosturePanel.gameObject.SetActive(false);
-            showingHistory = false; // Default to current session when turning on
-            RefreshDisplay();
+            if(HandTracking.HandUsed != 0)
+            {
+                if (UDPSender.StopStimState == true)
+                {
+                    gameObject.SetActive(true);
+                    targetPosturePanel.gameObject.SetActive(false);
+                    showingHistory = false; // Default to current session when turning on
+                    RefreshDisplay();
+                }
+
+                if (UDPSender.StopStimState == false)
+                {
+                    UDPSender.StopStim();
+                    TimerTextBox.StopStim();
+                    gameObject.SetActive(true);
+                    targetPosturePanel.gameObject.SetActive(false);
+                    showingHistory = false; // Default to current session when turning on
+                    RefreshDisplay();
+                }
+            }
+
         }
+
     }
 
     public void ScreenOff()

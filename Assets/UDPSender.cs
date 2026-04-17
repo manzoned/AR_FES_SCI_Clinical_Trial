@@ -55,6 +55,7 @@ public class UDPSender : MonoBehaviour
     private string TempString;
     private string AmpString;
     public int IPState;
+    private bool ProfileAmpState;
     private bool ExtensionStimState;
     private bool NewFingerMinState;
     private bool NewFingerMaxState;
@@ -67,6 +68,7 @@ public class UDPSender : MonoBehaviour
     public ProfileManager ProfileManager;
     public DataManager DataManager;
     public StatsPanel StatsPanel;
+    public HandUsePrompt HandUsePrompt;
 
 
 
@@ -82,7 +84,7 @@ public class UDPSender : MonoBehaviour
 
         // Stimulation Visualization - start with everything off
         Finger_off_textbox.gameObject.SetActive(true);
-        Thumb_off_textbox.gameObject .SetActive(true);
+        Thumb_off_textbox.gameObject.SetActive(true);
         Hand_open_off_textbox.gameObject.SetActive(true);
         finger_Off_Textbox_Target.gameObject.SetActive(true);
         thumb_Off_Textbox_Target.gameObject.SetActive(true);
@@ -105,8 +107,9 @@ public class UDPSender : MonoBehaviour
             ExternalMachineIP = ExternalMachineIP + TempString;
             IP_PromptOutput.text = "Input Laptop IP address here:" + "\n" + ExternalMachineIP;
         }
-        else { };
-    }    
+        else { }
+        ;
+    }
 
     public void Backspace()
     {
@@ -124,8 +127,8 @@ public class UDPSender : MonoBehaviour
 
 
         IPState = 0;
-        ExternalMachineIP = "";                
-        IP_PromptOutput.text = "Input Laptop IP address here:" +"\n" + ExternalMachineIP;
+        ExternalMachineIP = "";
+        IP_PromptOutput.text = "Input Laptop IP address here:" + "\n" + ExternalMachineIP;
         IP_PromptOutput.color = new Color(255, 255, 255, 1f);
         IP_Prompt.gameObject.SetActive(true);
         SendToExternal = false;
@@ -149,7 +152,7 @@ public class UDPSender : MonoBehaviour
         thumbTempMax = 0;
         manual_stim_offset = 0;
         normal_finger_min = normal_finger_bar;
-        normal_thumb_min = normal_thumb_bar; 
+        normal_thumb_min = normal_thumb_bar;
         StartCoroutine(SendVectorEverySecond());
 
 
@@ -157,7 +160,7 @@ public class UDPSender : MonoBehaviour
 
     public void StopStim()
     {
-        if(StopStimState == false)
+        if (StopStimState == false)
         {
             StopStimState = true;
             ExtensionStimState = false;
@@ -194,7 +197,7 @@ public class UDPSender : MonoBehaviour
             normal_finger_min = normal_finger_min + fingerIncrementer;
             if (normal_finger_min > 1) { normal_finger_min = 1; }
         }
-        
+
         if (normal_thumb_min < StimAmps[1]) { }
         else
         {
@@ -219,7 +222,7 @@ public class UDPSender : MonoBehaviour
         {
             if (ExtensionStimState == true)
             {
-                
+
                 StimAmps[0] = -1f;
                 StimAmps[1] = -1f;
                 StimAmps[2] = 1f; // full stimulation for extension (open loop for now)
@@ -242,21 +245,21 @@ public class UDPSender : MonoBehaviour
                 //{ StimAmps[0] = normal_finger_min + manual_stim_offset; }
                 //else
                 //{ StimAmps[0] = StimAmps[0]  + manual_stim_offset; }
-                
+
                 //if (StimAmps[1] < normal_thumb_min)
                 //{ StimAmps[1] = normal_thumb_min + manual_stim_offset; }
                 //else
                 //{ StimAmps[1] = StimAmps[1] + manual_stim_offset; }
-                
+
                 if (StimAmps[0] < normal_finger_min) { StimAmps[0] = normal_finger_min; }
                 if (StimAmps[1] < normal_thumb_min) { StimAmps[1] = normal_thumb_min; }
 
                 if (StimAmps[0] > 1) { StimAmps[0] = 1f; }
                 if (StimAmps[1] > 1) { StimAmps[1] = 1f; }
-                     
+
                 Hand_open_off_textbox.gameObject.SetActive(true);
-                Finger_off_textbox.gameObject .SetActive(false);
-                Thumb_off_textbox.gameObject.SetActive (false);
+                Finger_off_textbox.gameObject.SetActive(false);
+                Thumb_off_textbox.gameObject.SetActive(false);
                 hand_off_textbox_target.gameObject.SetActive(true);
                 finger_Off_Textbox_Target.gameObject.SetActive(false);
                 thumb_Off_Textbox_Target.gameObject.SetActive(false);
@@ -273,12 +276,12 @@ public class UDPSender : MonoBehaviour
                     {
                         StimAmps[1] = -1f;
                     }
-                    else { StimAmps[1] = ErrorScoreScript.ThumbStimAmp;}
-/*                    if (ErrorScoreScript.FingerStimAmp > 0.5)
-                    {
-                        StimAmps[1] = -1f;
-                    }
-                    else { StimAmps[1] = ErrorScoreScript.ThumbStimAmp; }*/
+                    else { StimAmps[1] = ErrorScoreScript.ThumbStimAmp; }
+                    /*                    if (ErrorScoreScript.FingerStimAmp > 0.5)
+                                        {
+                                            StimAmps[1] = -1f;
+                                        }
+                                        else { StimAmps[1] = ErrorScoreScript.ThumbStimAmp; }*/
                 }
 
                 if (StopStimState == true)
@@ -318,7 +321,7 @@ public class UDPSender : MonoBehaviour
                         thumb_bar = normal_thumb_min;
                     }
 
-                 
+
 
                 }
                 else
@@ -338,8 +341,8 @@ public class UDPSender : MonoBehaviour
                     }
                 }
 
-                if (StimAmps[0] < 0) { finger_bar = 0f; Finger_off_textbox.gameObject.SetActive(true); finger_Off_Textbox_Target.gameObject.SetActive(true); } 
-                if (StimAmps[1] < 0) {  thumb_bar = 0f; Thumb_off_textbox.gameObject.SetActive(true); thumb_Off_Textbox_Target.gameObject.SetActive(true); }
+                if (StimAmps[0] < 0) { finger_bar = 0f; Finger_off_textbox.gameObject.SetActive(true); finger_Off_Textbox_Target.gameObject.SetActive(true); }
+                if (StimAmps[1] < 0) { thumb_bar = 0f; Thumb_off_textbox.gameObject.SetActive(true); thumb_Off_Textbox_Target.gameObject.SetActive(true); }
 
                 //StimulationVisualizer.Instance.UpdateVisuals(finger_bar, thumb_bar, opening_bar);
                 StimulationVisualizerTarget.Instance.UpdateVisuals(finger_bar, thumb_bar, opening_bar);
@@ -388,13 +391,14 @@ public class UDPSender : MonoBehaviour
         InitialAmps[3] = ProfileManager.activeProfile.thumb_max;
         InitialAmps[4] = ProfileManager.activeProfile.open_max;
 
+        string ProfileString = ProfileManager.activeProfile.userName.ToString();
         string FingerMinString = ProfileManager.activeProfile.finger_min.ToString();
         string FingerMaxString = ProfileManager.activeProfile.finger_max.ToString();
         string ThumbMinString = ProfileManager.activeProfile.thumb_min.ToString();
         string ThumbMaxString = ProfileManager.activeProfile.thumb_max.ToString();
         string OpenMaxString = ProfileManager.activeProfile.open_max.ToString();
 
-        normal_finger_min = InitialAmps[0]/InitialAmps[1];
+        normal_finger_min = InitialAmps[0] / InitialAmps[1];
         normal_thumb_min = InitialAmps[2] / InitialAmps[3];
         fingerIncrementer = (1 - normal_finger_min) * 0.2f;// 20% of stim range
         thumbIncrementer = (1 - normal_thumb_min) * 0.2f;
@@ -403,7 +407,8 @@ public class UDPSender : MonoBehaviour
         normal_thumb_bar = normal_thumb_min;
 
         // display ampltiude information to participant so they can set it on myndsearch
-        Profile_AmplitudesOutput.text = "Finger Amp Min = " + FingerMinString + "\n" +
+        Profile_AmplitudesOutput.text = "<u>" + ProfileString + "</u>\n\n" +
+                                       "Finger Amp Min = " + FingerMinString + "\n" +
                                        "Finger Amp Max = " + FingerMaxString + "\n" +
                                        "Thumb Amp Min = " + ThumbMinString + "\n" +
                                        "Thumb Amp Max = " + ThumbMaxString + "\n" +
@@ -412,13 +417,14 @@ public class UDPSender : MonoBehaviour
                                        "Otherwise, say \"Begin\" to start";
         Profile_AmplitudesOutput.color = new Color(255, 255, 255, 1f);
         ProfileAmplitudes.gameObject.SetActive(true);
-       // Profile_PromptOutput.text = "What is your participant ID?";
+        ProfileAmpState = true;
+        // Profile_PromptOutput.text = "What is your participant ID?";
         //Profile_PromptOutput.color = new Color(255, 255, 255, 1f);
 
 
 
         byte[] data = new byte[InitialAmps.Length * 4];
-        for (int i = 0; i <InitialAmps.Length; i++)
+        for (int i = 0; i < InitialAmps.Length; i++)
         {
             Buffer.BlockCopy(BitConverter.GetBytes(InitialAmps[i]), 0, data, i * 4, 4);
         }
@@ -441,32 +447,42 @@ public class UDPSender : MonoBehaviour
         Debug.Log("Sent zero command on application quit.");
     }
 
-    public void NumberZero() { TempString = "0"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
-    public void NumberOne() { TempString = "1"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
-    public void NumberTwo() { TempString = "2"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
-    public void NumberThree() { TempString = "3"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
-    public void NumberFour() { TempString = "4"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
-    public void NumberFive() { TempString = "5"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
-    public void NumberSix() { TempString = "6"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
-    public void NumberSeven() { TempString = "7"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
-    public void NumberEight() { TempString = "8"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
-    public void NumberNine() { TempString = "9"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
-    public void NumberTen() { TempString = "10"; BuildIPAddress(); }
-    public void Dot() { TempString = "."; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); }
+    public void NumberZero() { TempString = "0"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues(); }
+    public void NumberOne() { TempString = "1"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
+    public void NumberTwo() { TempString = "2"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
+    public void NumberThree() { TempString = "3"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
+    public void NumberFour() { TempString = "4"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
+    public void NumberFive() { TempString = "5"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
+    public void NumberSix() { TempString = "6"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
+    public void NumberSeven() { TempString = "7"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
+    public void NumberEight() { TempString = "8"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
+    public void NumberNine() { TempString = "9"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
+    public void NumberTen() { TempString = "10"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
+    public void Dot() { TempString = "."; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
 
     /// <summary>
     /// This section of the code is only used if the participant needs to change the stimulation amplitudes
     /// </summary>
     public void SetNewAmpltiudesFingerMinPrompt()
     {
-        // first screen when setting new amplitudes
-        NewAmplitudesOutput.text = "What is the new Finger Min Amplitude? (e.g., 1.5)";
-        NewAmplitudesOutput.color = new Color(255, 255, 255, 1f);
-        NewAmplitudes.gameObject.SetActive(true);
+        if (ProfileAmpState == true)
+        {
+            NewFingerMinState = false;
+            NewFingerMaxState = false;
+            NewThumbMinState = false;
+            NewThumbMaxState = false;
+            NewOpenState = false;
 
-        ProfileAmplitudes.gameObject.SetActive(false);
-        AmpString = "";
-        TempString = "";
+            // first screen when setting new amplitudes
+            NewAmplitudesOutput.text = "What is the new Finger Min Amplitude? (e.g., 1.5)";
+            NewAmplitudesOutput.color = new Color(255, 255, 255, 1f);
+            NewAmplitudes.gameObject.SetActive(true);
+
+            ProfileAmplitudes.gameObject.SetActive(false);
+            AmpString = "";
+            TempString = "";
+        }
+
 
     }
 
@@ -479,14 +495,14 @@ public class UDPSender : MonoBehaviour
                                         AmpString + "\n" + "\n" +
                                         "Say \"confirm\" to move on";
         }
-        
+
 
     }
 
     public void Confirm_FingerMin()
     {
         // send to profile
-        if (NewFingerMinState == false)
+        if (NewFingerMinState == false && AmpString != "")
         {
             ProfileManager.activeProfile.finger_min = float.Parse(AmpString);
             ProfileManager.Instance.SaveCurrentProfile();
@@ -510,7 +526,7 @@ public class UDPSender : MonoBehaviour
 
         if (NewFingerMaxState == false && NewFingerMinState == true)
         {
-            Debug.Log("here");
+            //Debug.Log("here");
             AmpString = AmpString + TempString;
             NewAmplitudesOutput.text = "What is the new Finger MAX Amplitude? (e.g., 1.5)" + "\n" + "\n" +
                                         AmpString + "\n" + "\n" +
@@ -524,13 +540,89 @@ public class UDPSender : MonoBehaviour
         // send to profile
         if (NewFingerMaxState == false && NewFingerMinState == true && AmpString != "")
         {
-            Debug.Log("here");
+            //Debug.Log("here");
             ProfileManager.activeProfile.finger_max = float.Parse(AmpString);
             ProfileManager.Instance.SaveCurrentProfile();
             NewFingerMaxState = true;
+            ResetStrings();
+            SetNewAmplitudesThumbMinValues();
+
             // call new thumb screen etc etc.
         }
 
+    }
 
+    public void SetNewAmplitudesThumbMinValues()
+    {
+        if (NewFingerMaxState == true && NewThumbMinState == false)
+        {
+            AmpString = AmpString + TempString;
+            NewAmplitudesOutput.text = "What is the new Thumb MIN Amplitude? (e.g., 1.5)" + "\n" + "\n" +
+                            AmpString + "\n" + "\n" +
+                            "Say \"confirm\" to move on";
+
+        }
+    }
+
+    public void Confirm_ThumbMin()
+    {
+        if (NewThumbMinState == false && AmpString != "")
+        {
+            ProfileManager.activeProfile.thumb_min = float.Parse(AmpString);
+            ProfileManager.Instance.SaveCurrentProfile();
+            NewThumbMinState = true;
+            ResetStrings();
+            SetNewAmplitudesThumbMaxValues();
+            
+        }
+    }
+
+    public void SetNewAmplitudesThumbMaxValues()
+    {
+        if (NewThumbMinState == true && NewThumbMaxState == false)
+        {
+            AmpString = AmpString + TempString;
+            NewAmplitudesOutput.text = "What is the new Thumb MAX Amplitude? (e.g., 1.5)" + "\n" + "\n" +
+                            AmpString + "\n" + "\n" +
+                            "Say \"confirm\" to move on";
+        }
+    }
+
+    public void Confirm_ThumbMax()
+    {
+        if(NewThumbMinState == true && NewThumbMaxState == false && AmpString != "")
+        {
+            ProfileManager.activeProfile.thumb_max = float.Parse(AmpString);
+            ProfileManager.Instance.SaveCurrentProfile();
+            NewThumbMaxState = true;
+            ResetStrings();
+            SetNewAmplitudeOpenMaxValues();
+
+        }
+    }
+
+    public void SetNewAmplitudeOpenMaxValues()
+    {
+        if(NewThumbMaxState == true && NewOpenState == false)
+        {
+            AmpString = AmpString + TempString;
+            NewAmplitudesOutput.text = "What is the new Hand Opening MAX Amplitude? (e.g., 1.5)" + "\n" + "\n" +
+                            AmpString + "\n" + "\n" +
+                            "Say \"confirm\" to move on";
+        }
+    }
+
+    public void Confirm_OpenMax()
+    {
+        if(NewThumbMaxState == true && NewOpenState == false &  AmpString != "")
+        {
+            ProfileManager.activeProfile.open_max = float.Parse(AmpString);
+            ProfileManager.Instance.SaveCurrentProfile();
+            NewOpenState = true;
+            ResetStrings();
+            SendInitialStimAmps();
+            //HandUsePrompt.HandUsePromptOn();
+            NewAmplitudes.gameObject.SetActive(false);
+        }
     }
 }

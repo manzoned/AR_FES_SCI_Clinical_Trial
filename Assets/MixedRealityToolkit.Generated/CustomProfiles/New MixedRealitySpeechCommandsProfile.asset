@@ -627,7 +627,7 @@ MonoBehaviour:
       axisConstraint: 0
   - localizationKey: 
     keyword: Begin
-    keyCode: 0
+    keyCode: 52
     action:
       id: 0
       description: None

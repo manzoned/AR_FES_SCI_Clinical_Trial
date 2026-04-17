@@ -8,6 +8,7 @@ public class HandUsePrompt : MonoBehaviour
     public HandTracking1 Handtracking;
     public HandUse HandUse;
     public CalibrationPrompt CalibrationPrompt;
+    public UDPSender UDPSender;
 
     public void HandUsePromptOn()
     {
@@ -15,6 +16,7 @@ public class HandUsePrompt : MonoBehaviour
         {
             promptState = 1;
             gameObject.SetActive(true);
+            UDPSender.ProfileAmplitudes.gameObject.SetActive(false);
         }
 
     }
