@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: AR_FES_SCI_Clinical_Trial
+  productName: AR_FES_SCI_Clinical_Trial_v2
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -680,14 +680,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: FesSCI
+  metroPackageName: FesSCIv2
   metroPackageVersion: 1.0.0.0
   metroCertificatePath: Assets/WSATestCertificate.pfx
-  metroCertificatePassword: 
+  metroCertificatePassword: <5=?
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 0040be213eabdb01
-  metroApplicationDescription: TempProject
+  metroCertificateNotAfter: 804acaa390eddd01
+  metroApplicationDescription: TempProject_v2
   wsaImages: {}
   metroTileShortName: TempProject
   metroTileShowName: 0

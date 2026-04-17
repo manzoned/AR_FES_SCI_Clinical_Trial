@@ -6,6 +6,7 @@ using UnityEngine;
 public class StatsPanel : MonoBehaviour
 {
     public TargetPosturePanel targetPosturePanel;
+    public ChooseTargetPrompt ChooseTargetPrompt;
     public UDPSender UDPSender;
     public TimerTextBox TimerTextBox;
     public ProfileManager ProfileManager;
@@ -40,6 +41,7 @@ public class StatsPanel : MonoBehaviour
                 {
                     gameObject.SetActive(true);
                     targetPosturePanel.gameObject.SetActive(false);
+                    ChooseTargetPrompt.gameObject.SetActive(false);
                     showingHistory = false; // Default to current session when turning on
                     RefreshDisplay();
                 }
@@ -50,6 +52,7 @@ public class StatsPanel : MonoBehaviour
                     TimerTextBox.StopStim();
                     gameObject.SetActive(true);
                     targetPosturePanel.gameObject.SetActive(false);
+                    ChooseTargetPrompt.gameObject.SetActive(false);
                     showingHistory = false; // Default to current session when turning on
                     RefreshDisplay();
                 }
@@ -206,7 +209,7 @@ public class StatsPanel : MonoBehaviour
         if (showingHistory)
         {
             if (TitleText != null) TitleText.text = "Exercise Statistics (Historical Average)";
-            if (InstructionsText != null) InstructionsText.text = "To see current session say: \"Current\" or \"Stats\"  \n" +
+            if (InstructionsText != null) InstructionsText.text = "To see current session say: \"Current\" or \"Score\"  \n" +
                     "To exit the screen say \"Home\" or \"Reset\"";
 
             if (LateralRepsCount != null) LateralRepsCount.text = avgLatReps.ToString();

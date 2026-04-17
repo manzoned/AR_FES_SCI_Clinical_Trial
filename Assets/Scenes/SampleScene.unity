@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16852,7 +16852,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'To see exercise statistics say:
 
-    "Statistics" or "Stats"'
+    "Score" or "Performance"'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f137eba12ee10834cb19632437cfdb2e, type: 2}
   m_sharedMaterial: {fileID: 21433621844796372, guid: f137eba12ee10834cb19632437cfdb2e, type: 2}
@@ -30467,7 +30467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1954203695318403912, guid: 478732197b53dee4694480aac1a7c98c, type: 3}
       propertyPath: additionalOffset.y
-      value: 0.15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1954203695318403912, guid: 478732197b53dee4694480aac1a7c98c, type: 3}
       propertyPath: additionalOffset.z
@@ -60336,34 +60336,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFocusRequired: 0
   keywords:
-  - keyword: Can
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1035381917}
-          m_TargetAssemblyTypeName: LargeDiameter, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 600573731}
-          m_TargetAssemblyTypeName: LargeDiameterRig, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
   - keyword: Power
     response:
       m_PersistentCalls:
@@ -61676,34 +61648,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-  - keyword: Pencil
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1288980494}
-          m_TargetAssemblyTypeName: TipPinch, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 783360864}
-          m_TargetAssemblyTypeName: TipPinchRig, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - keyword: Pinch
     response:
       m_PersistentCalls:
@@ -61731,34 +61675,6 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
-          m_CallState: 2
-  - keyword: Credit Card
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1854149556}
-          m_TargetAssemblyTypeName: Lateral, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1738816645}
-          m_TargetAssemblyTypeName: LateralRig, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
           m_CallState: 2
   - keyword: Lateral
     response:
@@ -61795,118 +61711,6 @@ MonoBehaviour:
         - m_Target: {fileID: 239697152}
           m_TargetAssemblyTypeName: HandTracking1, Assembly-CSharp
           m_MethodName: Calibrate
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - keyword: Block
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1035381917}
-          m_TargetAssemblyTypeName: LargeDiameter, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 600573731}
-          m_TargetAssemblyTypeName: LargeDiameterRig, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - keyword: Bottle
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1035381917}
-          m_TargetAssemblyTypeName: LargeDiameter, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 600573731}
-          m_TargetAssemblyTypeName: LargeDiameterRig, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - keyword: Card
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1854149556}
-          m_TargetAssemblyTypeName: Lateral, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1738816645}
-          m_TargetAssemblyTypeName: LateralRig, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - keyword: Paper
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1854149556}
-          m_TargetAssemblyTypeName: Lateral, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1738816645}
-          m_TargetAssemblyTypeName: LateralRig, Assembly-CSharp
-          m_MethodName: Appear
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -62352,34 +62156,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-  - keyword: Pen
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1288980494}
-          m_TargetAssemblyTypeName: TipPinch, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 783360864}
-          m_TargetAssemblyTypeName: TipPinchRig, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
   - keyword: Calibration
     response:
       m_PersistentCalls:
@@ -62719,34 +62495,6 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Utilities.Solvers.ConstantViewSize,
             Microsoft.MixedReality.Toolkit.SDK
           m_MethodName: ZoomOut
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - keyword: Marble
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1288980494}
-          m_TargetAssemblyTypeName: TipPinch, Assembly-CSharp
-          m_MethodName: Appear
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 783360864}
-          m_TargetAssemblyTypeName: TipPinchRig, Assembly-CSharp
-          m_MethodName: Appear
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -63124,38 +62872,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - keyword: Set IP Address
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1552418322}
-          m_TargetAssemblyTypeName: UDPSender, Assembly-CSharp
-          m_MethodName: ResetIP
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - keyword: IP Complete
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1552418322}
-          m_TargetAssemblyTypeName: UDPSender, Assembly-CSharp
-          m_MethodName: IPComplete
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - keyword: Zero
     response:
       m_PersistentCalls:
@@ -63211,38 +62927,6 @@ MonoBehaviour:
         - m_Target: {fileID: 1552418322}
           m_TargetAssemblyTypeName: UDPSender, Assembly-CSharp
           m_MethodName: Dot
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - keyword: Countdown Initiated
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 156346447}
-          m_TargetAssemblyTypeName: TimerTextBox, Assembly-CSharp
-          m_MethodName: CountdownStimStart
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - keyword: Participant Initiated
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 156346447}
-          m_TargetAssemblyTypeName: TimerTextBox, Assembly-CSharp
-          m_MethodName: ParticipantStimStart
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -63748,7 +63432,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - keyword: Statistics
+  - keyword: Score
     response:
       m_PersistentCalls:
         m_Calls:
@@ -63764,7 +63448,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - keyword: Stats
+  - keyword: Performance
     response:
       m_PersistentCalls:
         m_Calls:
@@ -81146,7 +80830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1954203695318403912, guid: 478732197b53dee4694480aac1a7c98c, type: 3}
       propertyPath: additionalOffset.y
-      value: 0.15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1954203695318403912, guid: 478732197b53dee4694480aac1a7c98c, type: 3}
       propertyPath: additionalOffset.z
@@ -107701,6 +107385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosturePanel: {fileID: 1564128475}
+  ChooseTargetPrompt: {fileID: 1613905249}
   UDPSender: {fileID: 1552418322}
   TimerTextBox: {fileID: 156346447}
   ProfileManager: {fileID: 353655001}
