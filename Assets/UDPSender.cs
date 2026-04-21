@@ -100,25 +100,28 @@ public class UDPSender : MonoBehaviour
     public void BuildIPAddress()
     {
         // set externalmachineIP here using voice
-
-
+        // not relevant if storing IP on headset
+/*
         if (IPState == 0) // if IP complete isn't called this will be 0
         {
             ExternalMachineIP = ExternalMachineIP + TempString;
             IP_PromptOutput.text = "Input Laptop IP address here:" + "\n" + ExternalMachineIP;
         }
         else { }
-        ;
+        */
     }
 
     public void Backspace()
     {
-        ExternalMachineIP = ExternalMachineIP.Replace(TempString, "");
-        IP_PromptOutput.text = "Input Laptop IP address here:" + "\n" + ExternalMachineIP;
+/*        ExternalMachineIP = ExternalMachineIP.Replace(TempString, "");
+        IP_PromptOutput.text = "Input Laptop IP address here:" + "\n" + ExternalMachineIP;*/
         AmpString = "";
         TempString = "";
         SetNewAmplitudesFingerMinValues();
         SetNewAmplitudesFingerMaxValues();
+        SetNewAmplitudesThumbMinValues(); 
+        SetNewAmplitudesThumbMaxValues(); 
+        SetNewAmplitudeOpenMaxValues();
 
     }
 
@@ -379,9 +382,30 @@ public class UDPSender : MonoBehaviour
         Debug.Log("Array sent: " + string.Join(", ", array));
     }
 
+    public void ResendAmps()
+    {
+        // resend amps incase they don't initially get sent to python from headset
+        // SendInitialStimAmps not working reliably when deploy app
+        byte[] data = new byte[InitialAmps.Length * 4];
+        for (int i = 0; i < InitialAmps.Length; i++)
+        {
+            Buffer.BlockCopy(BitConverter.GetBytes(InitialAmps[i]), 0, data, i * 4, 4);
+        }
+
+        if (SendToExternal == true)
+        {
+            udpClient.Send(data, data.Length, ExternalMachineIP, 55001); // sending to an external computer
+
+        }
+
+        else
+        {
+            udpClient.Send(data, data.Length, "127.0.0.1", 55001); // sending to the same computer
+        }
+    }
     public void SendInitialStimAmps()
     {
-
+        NewAmplitudes.gameObject.SetActive(false);
         //Debug.Log(ProfileManager.activeProfile.finger_min);
 
         // retrieve amplitude information from profile (initially added by experimenter manually)
@@ -432,6 +456,7 @@ public class UDPSender : MonoBehaviour
         if (SendToExternal == true)
         {
             udpClient.Send(data, data.Length, ExternalMachineIP, 55001); // sending to an external computer
+
         }
         else
         {
@@ -614,7 +639,7 @@ public class UDPSender : MonoBehaviour
 
     public void Confirm_OpenMax()
     {
-        if(NewThumbMaxState == true && NewOpenState == false &  AmpString != "")
+        if(NewThumbMaxState == true && NewOpenState == false &&  AmpString != "")
         {
             ProfileManager.activeProfile.open_max = float.Parse(AmpString);
             ProfileManager.Instance.SaveCurrentProfile();
