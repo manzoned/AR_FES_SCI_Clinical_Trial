@@ -17,43 +17,8 @@ MonoBehaviour:
   recognitionConfidenceLevel: 2
   speechCommands:
   - localizationKey: 
-    keyword: Can
-    keyCode: 99
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Pencil
-    keyCode: 112
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Credit Card
-    keyCode: 118
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
     keyword: Reset
     keyCode: 278
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Align
-    keyCode: 97
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Set
-    keyCode: 115
     action:
       id: 0
       description: None
@@ -80,41 +45,6 @@ MonoBehaviour:
       description: None
       axisConstraint: 0
   - localizationKey: 
-    keyword: Pen
-    keyCode: 112
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Bottle
-    keyCode: 99
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Block
-    keyCode: 99
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Card
-    keyCode: 118
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Paper
-    keyCode: 118
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
     keyword: Home
     keyCode: 278
     action:
@@ -129,85 +59,8 @@ MonoBehaviour:
       description: None
       axisConstraint: 0
   - localizationKey: 
-    keyword: Complete
-    keyCode: 115
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
     keyword: Ready
     keyCode: 115
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Finished
-    keyCode: 115
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Background On
-    keyCode: 50
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Background Off
-    keyCode: 51
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Redo Trial
-    keyCode: 8
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Low Guidance
-    keyCode: 108
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Medium Guidance
-    keyCode: 109
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: High Guidance
-    keyCode: 104
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Therapist Set
-    keyCode: 116
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Custom Pose
-    keyCode: 107
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Add to poses
-    keyCode: 271
     action:
       id: 0
       description: None
@@ -227,20 +80,6 @@ MonoBehaviour:
       description: None
       axisConstraint: 0
   - localizationKey: 
-    keyword: Reset Therapist
-    keyCode: 260
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Marble
-    keyCode: 112
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
     keyword: Left Hand
     keyCode: 280
     action:
@@ -250,13 +89,6 @@ MonoBehaviour:
   - localizationKey: 
     keyword: Right Hand
     keyCode: 281
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Introduction
-    keyCode: 286
     action:
       id: 0
       description: None
@@ -353,20 +185,6 @@ MonoBehaviour:
       description: None
       axisConstraint: 0
   - localizationKey: 
-    keyword: Set IP Address
-    keyCode: 267
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: IP Complete
-    keyCode: 0
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
     keyword: Zero
     keyCode: 0
     action:
@@ -389,20 +207,6 @@ MonoBehaviour:
       axisConstraint: 0
   - localizationKey: 
     keyword: Point
-    keyCode: 0
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Countdown Initiated
-    keyCode: 0
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Participant Initiated
     keyCode: 0
     action:
       id: 0
@@ -557,21 +361,21 @@ MonoBehaviour:
       axisConstraint: 0
   - localizationKey: 
     keyword: Power
-    keyCode: 0
+    keyCode: 99
     action:
       id: 0
       description: None
       axisConstraint: 0
   - localizationKey: 
     keyword: Pinch
-    keyCode: 0
+    keyCode: 112
     action:
       id: 0
       description: None
       axisConstraint: 0
   - localizationKey: 
     keyword: Lateral
-    keyCode: 0
+    keyCode: 118
     action:
       id: 0
       description: None
@@ -635,6 +439,13 @@ MonoBehaviour:
   - localizationKey: 
     keyword: Confirm
     keyCode: 56
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: Stim levels
+    keyCode: 106
     action:
       id: 0
       description: None

@@ -12,9 +12,6 @@ public class DataManager : MonoBehaviour
     public string exerciseName;
 
     [Header("Data Source Configuration")]
-    // DRAG YOUR EXISTING SCRIPT HERE IN THE INSPECTOR
-    [Tooltip("Drag the object with your ExerciseController script here")]
-    // public ExerciseController exerciseSource;
     public TargetPosturePanel TargetPosturePanel;
 
     [Header("Current Session State")]
@@ -25,15 +22,6 @@ public class DataManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
-    }
-
-    private void Start()
-    {
-        // Safety Check
-        //if (exerciseSource == null)
-        //{
-        //    Debug.LogError("DataManager is missing a reference to your ExerciseController! Please drag it in.");
-        //}
     }
 
     // --- 1. START SESSION (Triggered by Profile Confirmation) ---
@@ -56,8 +44,6 @@ public class DataManager : MonoBehaviour
     }
 
     // --- 2. THE RECORDING FUNCTION ---
-    // Call this ONLY when a rep is finished.
-    // It will automatically go fetch the variables from your other script.
     public void RecordCurrentRepData()
     {
         if (currentSession == null)
@@ -65,41 +51,40 @@ public class DataManager : MonoBehaviour
             StartNewSession(); // Auto-start if they forgot
         }
 
-        // --- A. PULL DATA FROM YOUR SCRIPT ---
-        // REPLACE these variable names with the REAL names from your script!
-        //string exerciseName = exerciseSource.currentExerciseName;
-        //float score = exerciseSource.lastRepScore;
-        //float duration = exerciseSource.lastRepDuration;
-
-        if (TargetPosturePanel.objectType == "(Marble)") { exerciseName = "Pinch"; }
+        // --- A. DETERMINE EXERCISE NAME ---
+        exerciseName = "Unknown";
         if (TargetPosturePanel.objectType == "(Credit Card)") { exerciseName = "Lateral"; }
-        if (TargetPosturePanel.objectType == "(Block)") { exerciseName = "Power"; }
+        else if (TargetPosturePanel.objectType == "(Marble)") { exerciseName = "Pinch"; }
+        else if (TargetPosturePanel.objectType == "(Block)") { exerciseName = "Power"; }
 
-        //string exerciseName = TargetPosturePanel.objectType;
+        // --- B. FIND OR CREATE THE EXERCISE CONTAINER ---
+        // Search the current session to see if we already started doing this exercise earlier today
+        activeExercise = currentSession.exercisesPerformed.Find(ex => ex.exerciseName == exerciseName);
 
-        // --- B. MANAGE THE EXERCISE CONTAINER ---
-        // If we switched exercises (e.g. from "Squat" to "Lunge"), make a new container
-        if (activeExercise == null || activeExercise.exerciseName != exerciseName)
+        // If we haven't done this exercise yet in this session, create a new container for it
+        if (activeExercise == null)
         {
             activeExercise = new Exercise(exerciseName);
             currentSession.exercisesPerformed.Add(activeExercise);
-            Debug.Log($"Switched recording to new exercise: {exerciseName}");
+            Debug.Log($"Created new recording container for: {exerciseName}");
         }
 
         // --- C. CREATE AND SAVE REP ---
         Repetition newRep = new Repetition();
-        //newRep.score = score;
-        //newRep.duration = duration;
+
+        // Auto-calculate which rep number this is based on how many are already in the list
+        // Note: You may need to add 'public int repNumber;' to your Repetition class if you haven't!
+        newRep.repNumber = activeExercise.reps.Count + 1; 
+
         newRep.max_finger_stim = UDPSender.fingerTempMax;
         newRep.max_thumb_stim = UDPSender.thumbTempMax;
         newRep.timestamp = DateTime.Now.ToString("HH:mm:ss");
 
         activeExercise.reps.Add(newRep);
 
-        Debug.Log($"PULLED DATA -> Exercise: {exerciseName}");
+        Debug.Log($"PULLED DATA -> Exercise: {exerciseName} | Finger Max: {newRep.max_finger_stim} | Thumb Max: {newRep.max_thumb_stim}");
 
         // --- D. SAVE TO FILE ---
         ProfileManager.Instance.SaveCurrentProfile();
-
     }
 }

@@ -12,6 +12,9 @@ public class HandUse : MonoBehaviour
     public InstructionsPart5 InstructionsPart5;
     public HandTracking1 HandTracking;
     public HandUsePrompt HandUsePrompt;
+    public Finger_off_textbox_target finger_off_textbox;
+    public Thumb_off_textbox_target thumb_off_textbox;
+    public Hand_off_textbox_target hand_off_textbox;
 
     public void InstructionsOn()
     {
@@ -33,6 +36,12 @@ public class HandUse : MonoBehaviour
 
     public void RightHand()
     {
+        if (HandTracking.HandUsed == 0)
+        {
+            finger_off_textbox.transform.localPosition = new Vector3(finger_off_textbox.transform.localPosition.x + 0.005f, finger_off_textbox.transform.localPosition.y, 0.16f);
+            thumb_off_textbox.transform.localPosition = new Vector3(thumb_off_textbox.transform.localPosition.x + 0.005f, thumb_off_textbox.transform.localPosition.y, 0.16f);
+            hand_off_textbox.transform.localPosition = new Vector3(hand_off_textbox.transform.localPosition.x + 0.005f, hand_off_textbox.transform.localPosition.y, 0.16f);
+        }
         HandTracking.HandUsed = 1;
         HandUsePrompt.HandUsePromptOff();
     }

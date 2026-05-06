@@ -17,9 +17,9 @@ public class UDPSender : MonoBehaviour
     public IP_Prompt IP_Prompt;
     //public IPTextBox IPTextBox;
     public TextMeshPro IP_PromptOutput;
-    public Finger_off_textbox Finger_off_textbox;
-    public Thumb_off_textbox Thumb_off_textbox;
-    public Hand_open_off_textbox Hand_open_off_textbox;
+    //public Finger_off_textbox Finger_off_textbox;
+    //public Thumb_off_textbox Thumb_off_textbox;
+    //public Hand_open_off_textbox Hand_open_off_textbox;
     public Finger_off_textbox_target finger_Off_Textbox_Target;
     public Thumb_off_textbox_target thumb_Off_Textbox_Target;
     public Hand_off_textbox_target hand_off_textbox_target;
@@ -83,9 +83,9 @@ public class UDPSender : MonoBehaviour
         ExternalMachineIP = ConfigManager.targetIPAddress;
 
         // Stimulation Visualization - start with everything off
-        Finger_off_textbox.gameObject.SetActive(true);
-        Thumb_off_textbox.gameObject.SetActive(true);
-        Hand_open_off_textbox.gameObject.SetActive(true);
+        //Finger_off_textbox.gameObject.SetActive(true);
+        //Thumb_off_textbox.gameObject.SetActive(true);
+        //Hand_open_off_textbox.gameObject.SetActive(true);
         finger_Off_Textbox_Target.gameObject.SetActive(true);
         thumb_Off_Textbox_Target.gameObject.SetActive(true);
         hand_off_textbox_target.gameObject.SetActive(true);
@@ -94,6 +94,8 @@ public class UDPSender : MonoBehaviour
         opening_bar = 0f;
         //StimulationVisualizer.Instance.UpdateVisuals(finger_bar, thumb_bar, opening_bar);
         StimulationVisualizerTarget.Instance.UpdateVisuals(finger_bar, thumb_bar, opening_bar);
+
+       
 
     }
 
@@ -229,9 +231,9 @@ public class UDPSender : MonoBehaviour
                 StimAmps[0] = -1f;
                 StimAmps[1] = -1f;
                 StimAmps[2] = 1f; // full stimulation for extension (open loop for now)
-                Finger_off_textbox.gameObject.SetActive(true);
-                Thumb_off_textbox.gameObject.SetActive(true);
-                Hand_open_off_textbox.gameObject.SetActive(false);
+                //Finger_off_textbox.gameObject.SetActive(true);
+                //Thumb_off_textbox.gameObject.SetActive(true);
+                //Hand_open_off_textbox.gameObject.SetActive(false);
                 finger_Off_Textbox_Target.gameObject.SetActive(true);
                 thumb_Off_Textbox_Target.gameObject.SetActive(true);
                 hand_off_textbox_target.gameObject.SetActive(false);
@@ -260,9 +262,9 @@ public class UDPSender : MonoBehaviour
                 if (StimAmps[0] > 1) { StimAmps[0] = 1f; }
                 if (StimAmps[1] > 1) { StimAmps[1] = 1f; }
 
-                Hand_open_off_textbox.gameObject.SetActive(true);
-                Finger_off_textbox.gameObject.SetActive(false);
-                Thumb_off_textbox.gameObject.SetActive(false);
+                //Hand_open_off_textbox.gameObject.SetActive(true);
+                //Finger_off_textbox.gameObject.SetActive(false);
+                //Thumb_off_textbox.gameObject.SetActive(false);
                 hand_off_textbox_target.gameObject.SetActive(true);
                 finger_Off_Textbox_Target.gameObject.SetActive(false);
                 thumb_Off_Textbox_Target.gameObject.SetActive(false);
@@ -292,9 +294,9 @@ public class UDPSender : MonoBehaviour
                     StimAmps[0] = -1f;
                     StimAmps[1] = -1f;
                     StimAmps[2] = -1f;
-                    Finger_off_textbox.gameObject.SetActive(true);
-                    Thumb_off_textbox.gameObject.SetActive(true);
-                    Hand_open_off_textbox.gameObject.SetActive(true);
+                    //Finger_off_textbox.gameObject.SetActive(true);
+                    //Thumb_off_textbox.gameObject.SetActive(true);
+                    //Hand_open_off_textbox.gameObject.SetActive(true);
                     finger_Off_Textbox_Target.gameObject.SetActive(true);
                     thumb_Off_Textbox_Target.gameObject.SetActive(true);
                     hand_off_textbox_target.gameObject.SetActive(true);
@@ -344,8 +346,8 @@ public class UDPSender : MonoBehaviour
                     }
                 }
 
-                if (StimAmps[0] < 0) { finger_bar = 0f; Finger_off_textbox.gameObject.SetActive(true); finger_Off_Textbox_Target.gameObject.SetActive(true); }
-                if (StimAmps[1] < 0) { thumb_bar = 0f; Thumb_off_textbox.gameObject.SetActive(true); thumb_Off_Textbox_Target.gameObject.SetActive(true); }
+                if (StimAmps[0] < 0) { finger_bar = 0f; finger_Off_Textbox_Target.gameObject.SetActive(true); }
+                if (StimAmps[1] < 0) { thumb_bar = 0f; thumb_Off_Textbox_Target.gameObject.SetActive(true); }
 
                 //StimulationVisualizer.Instance.UpdateVisuals(finger_bar, thumb_bar, opening_bar);
                 StimulationVisualizerTarget.Instance.UpdateVisuals(finger_bar, thumb_bar, opening_bar);
@@ -499,7 +501,7 @@ public class UDPSender : MonoBehaviour
             NewOpenState = false;
 
             // first screen when setting new amplitudes
-            NewAmplitudesOutput.text = "What is the new Finger Min Amplitude? (e.g., 1.5)";
+            NewAmplitudesOutput.text = "What is the new Finger MIN Amplitude? (e.g., 1.5)";
             NewAmplitudesOutput.color = new Color(255, 255, 255, 1f);
             NewAmplitudes.gameObject.SetActive(true);
 

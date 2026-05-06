@@ -9,6 +9,7 @@ public class Repetition
     public float max_thumb_stim;
     //public float duration;   // e.g., 3.5 seconds
     public string timestamp; // The time it finished (e.g., "14:30:05")
+    public int repNumber;
 }
 
 // 2. An Exercise (A collection of reps, e.g., "Bicep Curl")

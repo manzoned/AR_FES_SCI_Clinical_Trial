@@ -11,6 +11,10 @@ public class StatsPanel : MonoBehaviour
     public TimerTextBox TimerTextBox;
     public ProfileManager ProfileManager;
     public HandTracking1 HandTracking;
+    public GameObject RepsCanvas;
+    public GameObject StimCanvas;
+    public GameObject TextStatsContainer;
+
 
     [Header("UI Text References (Reused for both modes)")]
     public TextMeshPro TitleText;
@@ -33,16 +37,19 @@ public class StatsPanel : MonoBehaviour
 
     public void ScreenOn()
     {
-        if(ProfileManager.ProfileSet == true)
+        if (ProfileManager.ProfileSet == true)
         {
-            if(HandTracking.HandUsed != 0)
+            if (HandTracking.HandUsed != 0)
             {
                 if (UDPSender.StopStimState == true)
                 {
                     gameObject.SetActive(true);
+                    TextStatsContainer.SetActive(true);
                     targetPosturePanel.gameObject.SetActive(false);
                     ChooseTargetPrompt.gameObject.SetActive(false);
                     showingHistory = false; // Default to current session when turning on
+                    RepsCanvas.gameObject.SetActive(false);
+                    StimCanvas.gameObject.SetActive(false);
                     RefreshDisplay();
                 }
 
@@ -51,9 +58,12 @@ public class StatsPanel : MonoBehaviour
                     UDPSender.StopStim();
                     TimerTextBox.StopStim();
                     gameObject.SetActive(true);
+                    TextStatsContainer.SetActive(true);
                     targetPosturePanel.gameObject.SetActive(false);
                     ChooseTargetPrompt.gameObject.SetActive(false);
                     showingHistory = false; // Default to current session when turning on
+                    RepsCanvas.gameObject.SetActive(false);
+                    StimCanvas.gameObject.SetActive(false);
                     RefreshDisplay();
                 }
             }
@@ -65,6 +75,7 @@ public class StatsPanel : MonoBehaviour
     public void ScreenOff()
     {
         gameObject.SetActive(false);
+        TextStatsContainer.SetActive(false);
     }
 
     // --- EXPLICIT VOICE COMMAND FUNCTIONS ---
@@ -75,6 +86,8 @@ public class StatsPanel : MonoBehaviour
         if (showingHistory == true)
         {
             showingHistory = false;
+            RepsCanvas.gameObject.SetActive(false);
+            StimCanvas.gameObject.SetActive(false);
             RefreshDisplay();
         }
     }
@@ -108,8 +121,14 @@ public class StatsPanel : MonoBehaviour
     public void UpdateCurrentSessionStats()
     {
         if (DataManager.Instance == null || DataManager.Instance.currentSession == null) return;
+        if (ProfileManager.Instance == null || ProfileManager.Instance.activeProfile == null) return;
 
+        UserProfile user = ProfileManager.Instance.activeProfile;
         Session current = DataManager.Instance.currentSession;
+
+        // --- Calculate Baseline Minimums for Normalization ---
+        float baselineFingerMin = user.finger_max > 0 ? (user.finger_min / user.finger_max) : 0f;
+        float baselineThumbMin = user.thumb_max > 0 ? (user.thumb_min / user.thumb_max) : 0f;
 
         int latReps = 0; float latStimSum = 0f;
         int pinReps = 0; float pinStimSum = 0f;
@@ -120,17 +139,32 @@ public class StatsPanel : MonoBehaviour
             if (ex.exerciseName == "Lateral")
             {
                 latReps += ex.reps.Count;
-                foreach (Repetition rep in ex.reps) latStimSum += (rep.max_finger_stim + rep.max_thumb_stim) / 2f;
+                foreach (Repetition rep in ex.reps)
+                {
+                    float normFinger = Mathf.InverseLerp(baselineFingerMin, 1f, rep.max_finger_stim);
+                    float normThumb = Mathf.InverseLerp(baselineThumbMin, 1f, rep.max_thumb_stim);
+                    latStimSum += (normFinger + normThumb) / 2f;
+                }
             }
             else if (ex.exerciseName == "Pinch")
             {
                 pinReps += ex.reps.Count;
-                foreach (Repetition rep in ex.reps) pinStimSum += (rep.max_finger_stim + rep.max_thumb_stim) / 2f;
+                foreach (Repetition rep in ex.reps)
+                {
+                    float normFinger = Mathf.InverseLerp(baselineFingerMin, 1f, rep.max_finger_stim);
+                    float normThumb = Mathf.InverseLerp(baselineThumbMin, 1f, rep.max_thumb_stim);
+                    pinStimSum += (normFinger + normThumb) / 2f;
+                }
             }
             else if (ex.exerciseName == "Power")
             {
                 powReps += ex.reps.Count;
-                foreach (Repetition rep in ex.reps) powStimSum += (rep.max_finger_stim + rep.max_thumb_stim) / 2f;
+                foreach (Repetition rep in ex.reps)
+                {
+                    float normFinger = Mathf.InverseLerp(baselineFingerMin, 1f, rep.max_finger_stim);
+                    float normThumb = Mathf.InverseLerp(baselineThumbMin, 1f, rep.max_thumb_stim);
+                    powStimSum += (normFinger + normThumb) / 2f;
+                }
             }
         }
 
@@ -149,9 +183,10 @@ public class StatsPanel : MonoBehaviour
             if (PinchRepsCount != null) PinchRepsCount.text = pinReps.ToString();
             if (PowerRepsCount != null) PowerRepsCount.text = powReps.ToString();
 
-            if (LateralStimCount != null) LateralStimCount.text = latAvg.ToString("F2");
-            if (PinchStimCount != null) PinchStimCount.text = pinAvg.ToString("F2");
-            if (PowerStimCount != null) PowerStimCount.text = powAvg.ToString("F2");
+            // Formatted to two decimal places (e.g. 0.75). Change "P0" to "P0" if you want 75%
+            if (LateralStimCount != null) LateralStimCount.text = latAvg.ToString("P0");
+            if (PinchStimCount != null) PinchStimCount.text = pinAvg.ToString("P0");
+            if (PowerStimCount != null) PowerStimCount.text = powAvg.ToString("P0");
         }
     }
 
@@ -164,6 +199,10 @@ public class StatsPanel : MonoBehaviour
 
         UserProfile user = ProfileManager.Instance.activeProfile;
         int currentSessionID = DataManager.Instance?.currentSession?.sessionID ?? -1;
+
+        // --- Calculate Baseline Minimums for Normalization ---
+        float baselineFingerMin = user.finger_max > 0 ? (user.finger_min / user.finger_max) : 0f;
+        float baselineThumbMin = user.thumb_max > 0 ? (user.thumb_min / user.thumb_max) : 0f;
 
         int latTotalReps = 0; float latStimSum = 0f;
         int pinTotalReps = 0; float pinStimSum = 0f;
@@ -182,17 +221,32 @@ public class StatsPanel : MonoBehaviour
                 if (ex.exerciseName == "Lateral")
                 {
                     latTotalReps += ex.reps.Count;
-                    foreach (Repetition rep in ex.reps) latStimSum += (rep.max_finger_stim + rep.max_thumb_stim) / 2f;
+                    foreach (Repetition rep in ex.reps)
+                    {
+                        float normFinger = Mathf.InverseLerp(baselineFingerMin, 1f, rep.max_finger_stim);
+                        float normThumb = Mathf.InverseLerp(baselineThumbMin, 1f, rep.max_thumb_stim);
+                        latStimSum += (normFinger + normThumb) / 2f;
+                    }
                 }
                 else if (ex.exerciseName == "Pinch")
                 {
                     pinTotalReps += ex.reps.Count;
-                    foreach (Repetition rep in ex.reps) pinStimSum += (rep.max_finger_stim + rep.max_thumb_stim) / 2f;
+                    foreach (Repetition rep in ex.reps)
+                    {
+                        float normFinger = Mathf.InverseLerp(baselineFingerMin, 1f, rep.max_finger_stim);
+                        float normThumb = Mathf.InverseLerp(baselineThumbMin, 1f, rep.max_thumb_stim);
+                        pinStimSum += (normFinger + normThumb) / 2f;
+                    }
                 }
                 else if (ex.exerciseName == "Power")
                 {
                     powTotalReps += ex.reps.Count;
-                    foreach (Repetition rep in ex.reps) powStimSum += (rep.max_finger_stim + rep.max_thumb_stim) / 2f;
+                    foreach (Repetition rep in ex.reps)
+                    {
+                        float normFinger = Mathf.InverseLerp(baselineFingerMin, 1f, rep.max_finger_stim);
+                        float normThumb = Mathf.InverseLerp(baselineThumbMin, 1f, rep.max_thumb_stim);
+                        powStimSum += (normFinger + normThumb) / 2f;
+                    }
                 }
             }
         }
@@ -216,9 +270,10 @@ public class StatsPanel : MonoBehaviour
             if (PinchRepsCount != null) PinchRepsCount.text = avgPinReps.ToString();
             if (PowerRepsCount != null) PowerRepsCount.text = avgPowReps.ToString();
 
-            if (LateralStimCount != null) LateralStimCount.text = latAvg.ToString("F2");
-            if (PinchStimCount != null) PinchStimCount.text = pinAvg.ToString("F2");
-            if (PowerStimCount != null) PowerStimCount.text = powAvg.ToString("F2");
+            // Formatted to two decimal places (e.g. 0.75). Change "P0" to "P0" if you want 75%
+            if (LateralStimCount != null) LateralStimCount.text = latAvg.ToString("P0");
+            if (PinchStimCount != null) PinchStimCount.text = pinAvg.ToString("P0");
+            if (PowerStimCount != null) PowerStimCount.text = powAvg.ToString("P0");
         }
     }
 }
