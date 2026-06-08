@@ -1486,11 +1486,11 @@ public class ErrorScoreScript_v2 : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            FeedbackTest.gameObject.SetActive(true);
-            feedback_test.text = "Feedback Test";
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha0))
+        //{
+        //    FeedbackTest.gameObject.SetActive(true);
+        //    feedback_test.text = "Feedback Test";
+        //}
 
         if(TipPinch.GraspState == 1 || Lateral.GraspState == 1 || LargeDiameter.GraspState == 1)
         {

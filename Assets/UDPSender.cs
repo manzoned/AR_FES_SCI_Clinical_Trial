@@ -56,6 +56,7 @@ public class UDPSender : MonoBehaviour
     private string TempString;
     private string AmpString;
     public int IPState;
+    public bool FinalAmplitudesSet;
     private bool ProfileAmpState;
     public bool ExtensionStimState;
     private bool NewFingerMinState;
@@ -402,24 +403,32 @@ public class UDPSender : MonoBehaviour
 
     public void ResendAmps()
     {
-        // resend amps incase they don't initially get sent to python from headset
-        // SendInitialStimAmps not working reliably when deploy app
-        byte[] data = new byte[InitialAmps.Length * 4];
-        for (int i = 0; i < InitialAmps.Length; i++)
+        if (ProfileManager.ProfileSet == true)
         {
-            Buffer.BlockCopy(BitConverter.GetBytes(InitialAmps[i]), 0, data, i * 4, 4);
+            if (NewAmplitudes.gameObject.activeSelf == false)
+            {
+                // resend amps incase they don't initially get sent to python from headset
+                // SendInitialStimAmps not working reliably when deploy app
+                byte[] data = new byte[InitialAmps.Length * 4];
+                for (int i = 0; i < InitialAmps.Length; i++)
+                {
+                    Buffer.BlockCopy(BitConverter.GetBytes(InitialAmps[i]), 0, data, i * 4, 4);
+                }
+
+                if (SendToExternal == true)
+                {
+                    udpClient.Send(data, data.Length, ExternalMachineIP, 55001); // sending to an external computer
+
+                }
+
+                else
+                {
+                    udpClient.Send(data, data.Length, "127.0.0.1", 55001); // sending to the same computer
+                }
+            }
+
         }
 
-        if (SendToExternal == true)
-        {
-            udpClient.Send(data, data.Length, ExternalMachineIP, 55001); // sending to an external computer
-
-        }
-
-        else
-        {
-            udpClient.Send(data, data.Length, "127.0.0.1", 55001); // sending to the same computer
-        }
     }
     public void SendInitialStimAmps()
     {
@@ -490,40 +499,142 @@ public class UDPSender : MonoBehaviour
         Debug.Log("Sent zero command on application quit.");
     }
 
-    public void NumberZero() { TempString = "0"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues(); }
-    public void NumberOne() { TempString = "1"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
-    public void NumberTwo() { TempString = "2"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
-    public void NumberThree() { TempString = "3"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
-    public void NumberFour() { TempString = "4"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
-    public void NumberFive() { TempString = "5"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
-    public void NumberSix() { TempString = "6"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
-    public void NumberSeven() { TempString = "7"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
-    public void NumberEight() { TempString = "8"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
-    public void NumberNine() { TempString = "9"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
-    public void NumberTen() { TempString = "10"; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
-    public void Dot() { TempString = "."; BuildIPAddress(); SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();}
+    public void NumberZero() 
+    { 
+        if (FinalAmplitudesSet == false)
+        {
+            TempString = "0"; SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();
+        }
+
+    }
+    public void NumberOne()
+    {
+        if (FinalAmplitudesSet == false)
+        {
+            TempString = "1"; SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();
+        }
+
+    }
+    public void NumberTwo()
+    {
+        if (FinalAmplitudesSet == false)
+        {
+            TempString = "2"; SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();
+        }
+
+    }
+
+    public void NumberThree()
+    {
+        if (FinalAmplitudesSet == false)
+        {
+            TempString = "3"; SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();
+        }
+
+    }
+    public void NumberFour()
+    {
+        if (FinalAmplitudesSet == false)
+        {
+            TempString = "4"; SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();
+        }
+
+    }
+    public void NumberFive()
+    {
+        if (FinalAmplitudesSet == false)
+        {
+            TempString = "5"; SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();
+        }
+
+    }
+    public void NumberSix()
+    {
+        if (FinalAmplitudesSet == false)
+        {
+            TempString = "6"; SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();
+        }
+
+    }
+    public void NumberSeven()
+    {
+        if (FinalAmplitudesSet == false)
+        {
+            TempString = "7"; SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();
+        }
+
+    }
+    public void NumberEight()
+    {
+        if (FinalAmplitudesSet == false)
+        {
+            TempString = "8"; SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();
+        }
+
+    }
+    public void NumberNine()
+    {
+        if (FinalAmplitudesSet == false)
+        {
+            TempString = "9"; SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();
+        }
+
+    }
+    public void NumberTen()
+    {
+        if (FinalAmplitudesSet == false)
+        {
+            TempString = "10"; SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();
+        }
+
+    }
+    public void Dot()
+    {
+        if (FinalAmplitudesSet == false)
+        {
+            TempString = "."; SetNewAmplitudesFingerMinValues(); SetNewAmplitudesFingerMaxValues(); SetNewAmplitudesThumbMinValues(); SetNewAmplitudesThumbMaxValues(); SetNewAmplitudeOpenMaxValues();
+        }
+
+    }
+    public void SetFinalAmplitudes()
+    {
+        if (ProfileManager.ProfileSet == true)
+        {
+            if (FinalAmplitudesSet == false)
+            {
+                if (NewAmplitudes.gameObject.activeSelf == false)
+                {
+                    FinalAmplitudesSet = true;
+                }
+            }
+        }
+
+    }
 
     /// <summary>
     /// This section of the code is only used if the participant needs to change the stimulation amplitudes
     /// </summary>
     public void SetNewAmpltiudesFingerMinPrompt()
     {
-        if (ProfileAmpState == true)
+        if (FinalAmplitudesSet == false)
         {
-            NewFingerMinState = false;
-            NewFingerMaxState = false;
-            NewThumbMinState = false;
-            NewThumbMaxState = false;
-            NewOpenState = false;
+            if (ProfileAmpState == true)
+            {
+                NewFingerMinState = false;
+                NewFingerMaxState = false;
+                NewThumbMinState = false;
+                NewThumbMaxState = false;
+                NewOpenState = false;
 
-            // first screen when setting new amplitudes
-            NewAmplitudesOutput.text = "What is the new Finger MIN Amplitude? (e.g., 1.5)";
-            NewAmplitudesOutput.color = new Color(255, 255, 255, 1f);
-            NewAmplitudes.gameObject.SetActive(true);
+                // first screen when setting new amplitudes
+                NewAmplitudesOutput.text = "What is the new Finger MIN Amplitude? (e.g., 1.5)";
+                NewAmplitudesOutput.color = new Color(255, 255, 255, 1f);
+                NewAmplitudes.gameObject.SetActive(true);
 
-            ProfileAmplitudes.gameObject.SetActive(false);
-            AmpString = "";
-            TempString = "";
+                ProfileAmplitudes.gameObject.SetActive(false);
+                AmpString = "";
+                TempString = "";
+            }
         }
 
 
@@ -544,16 +655,21 @@ public class UDPSender : MonoBehaviour
 
     public void Confirm_FingerMin()
     {
-        // send to profile
-        if (NewFingerMinState == false && AmpString != "")
+        if (ProfileManager.ProfileSet == true)
         {
-            ProfileManager.activeProfile.finger_min = float.Parse(AmpString);
-            ProfileManager.Instance.SaveCurrentProfile();
-            NewFingerMinState = true;
-            ResetStrings();
-            SetNewAmplitudesFingerMaxValues();
+            if (FinalAmplitudesSet == false)
+            {
+                // send to profile
+                if (NewFingerMinState == false && AmpString != "")
+                {
+                    ProfileManager.activeProfile.finger_min = float.Parse(AmpString);
+                    ProfileManager.Instance.SaveCurrentProfile();
+                    NewFingerMinState = true;
+                    ResetStrings();
+                    SetNewAmplitudesFingerMaxValues();
+                }
+            }
         }
-
 
 
     }
@@ -580,18 +696,26 @@ public class UDPSender : MonoBehaviour
 
     public void Confirm_FingerMax()
     {
-        // send to profile
-        if (NewFingerMaxState == false && NewFingerMinState == true && AmpString != "")
+        if (ProfileManager.ProfileSet == true)
         {
-            //Debug.Log("here");
-            ProfileManager.activeProfile.finger_max = float.Parse(AmpString);
-            ProfileManager.Instance.SaveCurrentProfile();
-            NewFingerMaxState = true;
-            ResetStrings();
-            SetNewAmplitudesThumbMinValues();
+            if (FinalAmplitudesSet == false)
+            {
+                // send to profile
+                if (NewFingerMaxState == false && NewFingerMinState == true && AmpString != "")
+                {
+                    //Debug.Log("here");
+                    ProfileManager.activeProfile.finger_max = float.Parse(AmpString);
+                    ProfileManager.Instance.SaveCurrentProfile();
+                    NewFingerMaxState = true;
+                    ResetStrings();
+                    SetNewAmplitudesThumbMinValues();
 
-            // call new thumb screen etc etc.
+                    // call new thumb screen etc etc.
+                }
+            }
         }
+
+
 
     }
 
@@ -609,15 +733,23 @@ public class UDPSender : MonoBehaviour
 
     public void Confirm_ThumbMin()
     {
-        if (NewThumbMinState == false && AmpString != "")
+        if (ProfileManager.ProfileSet == true)
         {
-            ProfileManager.activeProfile.thumb_min = float.Parse(AmpString);
-            ProfileManager.Instance.SaveCurrentProfile();
-            NewThumbMinState = true;
-            ResetStrings();
-            SetNewAmplitudesThumbMaxValues();
+            if (FinalAmplitudesSet == false)
+            {
+                if (NewThumbMinState == false && AmpString != "")
+                {
+                    ProfileManager.activeProfile.thumb_min = float.Parse(AmpString);
+                    ProfileManager.Instance.SaveCurrentProfile();
+                    NewThumbMinState = true;
+                    ResetStrings();
+                    SetNewAmplitudesThumbMaxValues();
             
+                }
+            }
         }
+
+
     }
 
     public void SetNewAmplitudesThumbMaxValues()
@@ -633,15 +765,23 @@ public class UDPSender : MonoBehaviour
 
     public void Confirm_ThumbMax()
     {
-        if(NewThumbMinState == true && NewThumbMaxState == false && AmpString != "")
+        if (ProfileManager.ProfileSet == true)
         {
-            ProfileManager.activeProfile.thumb_max = float.Parse(AmpString);
-            ProfileManager.Instance.SaveCurrentProfile();
-            NewThumbMaxState = true;
-            ResetStrings();
-            SetNewAmplitudeOpenMaxValues();
+            if (FinalAmplitudesSet == false)
+            {
+                if(NewThumbMinState == true && NewThumbMaxState == false && AmpString != "")
+                {
+                    ProfileManager.activeProfile.thumb_max = float.Parse(AmpString);
+                    ProfileManager.Instance.SaveCurrentProfile();
+                    NewThumbMaxState = true;
+                    ResetStrings();
+                    SetNewAmplitudeOpenMaxValues();
 
+                }
+            }
         }
+
+
     }
 
     public void SetNewAmplitudeOpenMaxValues()
@@ -657,15 +797,23 @@ public class UDPSender : MonoBehaviour
 
     public void Confirm_OpenMax()
     {
-        if(NewThumbMaxState == true && NewOpenState == false &&  AmpString != "")
+        if (ProfileManager.ProfileSet == true)
         {
-            ProfileManager.activeProfile.open_max = float.Parse(AmpString);
-            ProfileManager.Instance.SaveCurrentProfile();
-            NewOpenState = true;
-            ResetStrings();
-            SendInitialStimAmps();
-            //HandUsePrompt.HandUsePromptOn();
-            NewAmplitudes.gameObject.SetActive(false);
+            if (FinalAmplitudesSet == false)
+            {
+                if (NewThumbMaxState == true && NewOpenState == false && AmpString != "")
+                {
+                    ProfileManager.activeProfile.open_max = float.Parse(AmpString);
+                    ProfileManager.Instance.SaveCurrentProfile();
+                    NewOpenState = true;
+                    ResetStrings();
+                    SendInitialStimAmps();
+                    //HandUsePrompt.HandUsePromptOn();
+                    NewAmplitudes.gameObject.SetActive(false);
+                }
+            }
         }
+
+
     }
 }

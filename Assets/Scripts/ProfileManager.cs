@@ -112,11 +112,15 @@ public class ProfileManager : MonoBehaviour
     public void ProfileNinetyNine() { Profile_PromptOutput.text = "Are you sure you are Participant 99?"; tempProfile = "Participant 99"; }
     public void SetProfile()
     {
-        ProfilePrompt.gameObject.SetActive(false);
-        LoadProfile(tempProfile);
-        DataManager.StartNewSession();
-        UDPSender.SendInitialStimAmps();
-        ProfileSet = true;
+        if (ProfileSet == false)
+        {
+            ProfilePrompt.gameObject.SetActive(false);
+            LoadProfile(tempProfile);
+            DataManager.StartNewSession();
+            UDPSender.SendInitialStimAmps();
+            ProfileSet = true;
+        }
+
     }
 
 
@@ -145,10 +149,12 @@ public class ProfileManager : MonoBehaviour
     {
         // after setting amplitudes in myndsearch with guidance from headset need to being session 
         // open hand prompt and remove amplitude prompts
-        ProfileAmplitudes.gameObject.SetActive(false);
-        HandUsePrompt.gameObject.SetActive(true);
+       
+        //ProfileAmplitudes.gameObject.SetActive(false);
+        //HandUsePrompt.gameObject.SetActive(true);
 
     }
+
 
     public void CancelLogin()
     {
