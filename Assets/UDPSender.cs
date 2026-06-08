@@ -27,6 +27,7 @@ public class UDPSender : MonoBehaviour
     public TextMeshPro Profile_AmplitudesOutput;
     public NewAmplitudes NewAmplitudes;
     public TextMeshPro NewAmplitudesOutput;
+    public TextMeshPro InstructionsPromptOutput;
     public bool NormalBarFullRange;
     public float[] StimAmps;
     public float[] InitialAmps;
@@ -56,19 +57,25 @@ public class UDPSender : MonoBehaviour
     private string AmpString;
     public int IPState;
     private bool ProfileAmpState;
-    private bool ExtensionStimState;
+    public bool ExtensionStimState;
     private bool NewFingerMinState;
     private bool NewFingerMaxState;
     private bool NewThumbMinState;
     private bool NewThumbMaxState;
     private bool NewOpenState;
     public ConfigManager ConfigManager;
-    public StimulationVisualizer StimulationVisualizer;
+    //public StimulationVisualizer StimulationVisualizer;
     public StimulationVisualizerTarget StimulationVisualizerTarget;
     public ProfileManager ProfileManager;
     public DataManager DataManager;
     public StatsPanel StatsPanel;
     public HandUsePrompt HandUsePrompt;
+    public Timer Timer;
+    public InstructionsBackPlate InstructionsBackPlate;
+    public RepetitionsBackPlate RepetitionsBackPlate;
+    public RepetitionTextBox RepetitionTextBox;
+    public StimDashBackPlate StimDashBackPlate;
+
 
 
 
@@ -94,6 +101,7 @@ public class UDPSender : MonoBehaviour
         opening_bar = 0f;
         //StimulationVisualizer.Instance.UpdateVisuals(finger_bar, thumb_bar, opening_bar);
         StimulationVisualizerTarget.Instance.UpdateVisuals(finger_bar, thumb_bar, opening_bar);
+        StopStimState = true;
 
        
 
@@ -187,7 +195,15 @@ public class UDPSender : MonoBehaviour
         {
             //ExtensionStimBackPlate.gameObject.SetActive(true);
             //TimerTextBox.StopStim();
+            StopStimState = false;
             ExtensionStimState = true;
+            StimDashBackPlate.gameObject.SetActive(true);
+            StimulationVisualizerTarget.gameObject.SetActive(true);
+            Timer.gameObject.SetActive(false);
+            InstructionsBackPlate.gameObject.SetActive(false);
+            RepetitionsBackPlate.gameObject.SetActive(false);
+            RepetitionTextBox.gameObject.SetActive(false);
+            InstructionsPromptOutput.text = "";
             StartCoroutine(SendVectorEverySecond());
         }
 

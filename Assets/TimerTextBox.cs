@@ -22,7 +22,7 @@ public class TimerTextBox : MonoBehaviour
     public InstructionsBackPlate InstructionsBackPlate;
     public RepetitionsBackPlate RepetitionsBackPlate;
     public RepetitionTextBox RepetitionTextBox;
-    public StimDashBackPlate DashboardBackPlate;
+    public StimDashBackPlate StimDashBackPlate;
     public StimulationVisualizerTarget StimulationVisualizerTarget;
     public StatsPrompt StatsPrompt;
     // trigger timer after person says ready
@@ -38,15 +38,19 @@ public class TimerTextBox : MonoBehaviour
     }
     public void StartTimer()
     {
-        if (TargetPosturePanel.ScreenIsOn == 1)
+        if(UDPSender.StopStimState == true || UDPSender.ExtensionStimState == true)
         {
-            if(ParticipantInitiated)
+            if (TargetPosturePanel.ScreenIsOn == 1)
             {
-                TimeRemaining = 3f;
+                if(ParticipantInitiated)
+                {
+                    TimeRemaining = 3f;
+                }
+                else { TimeRemaining = 10f; }
+                ContinueTimer = true;
             }
-            else { TimeRemaining = 10f; }
-            ContinueTimer = true;
         }
+
 
     }
 
@@ -82,7 +86,7 @@ public class TimerTextBox : MonoBehaviour
                 timerTextBox.text = "Stim starts in:";
                 timerTextBox.transform.localPosition = new Vector3(timerTextBox.transform.localPosition.x, 1.2f, timerTextBox.transform.localPosition.z);
                 InstructionsBackPlate.gameObject.SetActive(true);
-                DashboardBackPlate.gameObject.SetActive(false);
+                StimDashBackPlate.gameObject.SetActive(false);
                 StimulationVisualizerTarget.gameObject.SetActive(false);
             }
             else
@@ -95,7 +99,7 @@ public class TimerTextBox : MonoBehaviour
                 timerTextBox.text = "Stim ON!";
                 timerTextBox.transform.localPosition = new Vector3(timerTextBox.transform.localPosition.x, 0.2f, timerTextBox.transform.localPosition.z);
                 UDPSender.StartStim();
-                DashboardBackPlate.gameObject.SetActive(true);
+                StimDashBackPlate.gameObject.SetActive(true);
                 StimulationVisualizerTarget.gameObject.SetActive(true);
                 Timer.gameObject.SetActive(false);
                 InstructionsBackPlate.gameObject.SetActive(false);

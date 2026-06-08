@@ -178,13 +178,6 @@ MonoBehaviour:
       description: None
       axisConstraint: 0
   - localizationKey: 
-    keyword: Dot
-    keyCode: 46
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
     keyword: Zero
     keyCode: 0
     action:
@@ -207,7 +200,7 @@ MonoBehaviour:
       axisConstraint: 0
   - localizationKey: 
     keyword: Point
-    keyCode: 0
+    keyCode: 46
     action:
       id: 0
       description: None
@@ -227,7 +220,7 @@ MonoBehaviour:
       description: None
       axisConstraint: 0
   - localizationKey: 
-    keyword: Start
+    keyword: Start Stim
     keyCode: 115
     action:
       id: 0
@@ -332,34 +325,6 @@ MonoBehaviour:
       description: None
       axisConstraint: 0
   - localizationKey: 
-    keyword: Reset Profile
-    keyCode: 269
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Show Stim
-    keyCode: 270
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Hide Stim
-    keyCode: 45
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Statistics
-    keyCode: 271
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
     keyword: Power
     keyCode: 99
     action:
@@ -376,13 +341,6 @@ MonoBehaviour:
   - localizationKey: 
     keyword: Lateral
     keyCode: 118
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Stats
-    keyCode: 271
     action:
       id: 0
       description: None
@@ -411,13 +369,6 @@ MonoBehaviour:
   - localizationKey: 
     keyword: Current
     keyCode: 100
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Profile Reset
-    keyCode: 59
     action:
       id: 0
       description: None

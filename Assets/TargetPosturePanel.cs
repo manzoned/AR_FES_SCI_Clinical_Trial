@@ -32,6 +32,7 @@ public class TargetPosturePanel : MonoBehaviour
     public StimulationVisualizerTarget StimulationVisualizerTarget;
     public StimDashBackPlate StimDashBackPlate;
     public StatsPrompt StatsPrompt;
+    public UDPSender UDPSender;
     public int ScreenIsOn;
     public int ScreenTime;
     public int ScreenPositionSetRight;
@@ -76,11 +77,15 @@ public class TargetPosturePanel : MonoBehaviour
     {
         //scorePromptText = "Stimulation starting in:";
         //InstructionsPromptOutput.text = scorePromptText; // easier to just replace the instructions box that is already there
-        if (ScreenIsOn == 1)
+       if(UDPSender.StopStimState == true || UDPSender.ExtensionStimState == true)
         {
-            Timer.gameObject.SetActive(true);
-            InstructionsPromptOutput.text = "";
+            if (ScreenIsOn == 1)
+            {
+                Timer.gameObject.SetActive(true);
+                InstructionsPromptOutput.text = "";
+            }
         }
+
 
 
     }
@@ -239,7 +244,8 @@ public class TargetPosturePanel : MonoBehaviour
         if(TimerTextBox.ParticipantInitiated)
         {
             //InstructionsText = InstructionsText + "\n" + "\n" + "When ready, start stimulation." + "\n" + "(say: 'Ready' or 'Start Stim')";
-            InstructionsText = InstructionsText + "\n" + "\n" + "To start stimulation say:" + "\n" + "'READY' or 'START'";
+            //InstructionsText = InstructionsText + "\n" + "\n" + "To start stimulation say:" + "\n" + "'READY'";
+            InstructionsText = InstructionsText + "\n" + "\n" + "Say \"READY\" for hand closing stim or \"OPEN HAND\" for hand opening stim";
             InstructionsPromptOutput.text = InstructionsText;
         
         }
@@ -283,28 +289,32 @@ public class TargetPosturePanel : MonoBehaviour
 
     public void TrialIterator()
     {
-        if(ScreenIsOn == 1)
+        if (UDPSender.StopStimState == true || UDPSender.ExtensionStimState == true)
         {
-            TrialNumberController.trialCounter++;
-            if (TipPinch.GraspState == 1) 
-            { 
-                TrialNumberController.tipPinchCounter++;
-                RepPromptText = "Repetitions " + objectType + $" = {TrialNumberController.tipPinchCounter}" + "\n" +
-                     $"Total Repetitions = {TrialNumberController.trialCounter}";
-            }
-            if (Lateral.GraspState == 1) 
-            { 
-                TrialNumberController.lateralCounter++;
-                RepPromptText = "Repetitions " + objectType + $" = {TrialNumberController.lateralCounter}" + "\n" +
-                     $"Total Repetitions = {TrialNumberController.trialCounter}";
-            }
-            if (LargeDiameter.GraspState == 1) 
-            { 
-                TrialNumberController.largeDiameterCounter++;
-                RepPromptText = "Repetitions " + objectType + $" = {TrialNumberController.largeDiameterCounter}" + "\n" +
-                     $"Total Repetitions = {TrialNumberController.trialCounter}";
+            if(ScreenIsOn == 1)
+            {
+                TrialNumberController.trialCounter++;
+                if (TipPinch.GraspState == 1) 
+                { 
+                    TrialNumberController.tipPinchCounter++;
+                    RepPromptText = "Repetitions " + objectType + $" = {TrialNumberController.tipPinchCounter}" + "\n" +
+                         $"Total Repetitions = {TrialNumberController.trialCounter}";
+                }
+                if (Lateral.GraspState == 1) 
+                { 
+                    TrialNumberController.lateralCounter++;
+                    RepPromptText = "Repetitions " + objectType + $" = {TrialNumberController.lateralCounter}" + "\n" +
+                         $"Total Repetitions = {TrialNumberController.trialCounter}";
+                }
+                if (LargeDiameter.GraspState == 1) 
+                { 
+                    TrialNumberController.largeDiameterCounter++;
+                    RepPromptText = "Repetitions " + objectType + $" = {TrialNumberController.largeDiameterCounter}" + "\n" +
+                         $"Total Repetitions = {TrialNumberController.trialCounter}";
+                }
             }
         }
+
 
 
         //RepPromptOutput.text = RepPromptText;

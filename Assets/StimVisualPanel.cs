@@ -9,6 +9,7 @@ public class StimVisualPanel : MonoBehaviour
     public HandTracking1 HandTracking;
     public SolverHandler SolverHandler;
     public TargetPosturePanel TargetPosturePanel;
+    public UDPSender UDPSender;
     //public MainCamera MainCamera;
     // Start is called before the first frame update
     void Start()
@@ -19,18 +20,22 @@ public class StimVisualPanel : MonoBehaviour
     public void ScreenOn()
     {
         //gameObject.SetActive(true);
-        if(TargetPosturePanel.ScreenIsOn == 1)
+        if(UDPSender.StopStimState == true || UDPSender.ExtensionStimState == true)
         {
-            if(HandTracking.HandUsed == 1)
+            if(TargetPosturePanel.ScreenIsOn == 1)
             {
-                SolverHandler.AdditionalOffset = new Vector3(0.3f, -0.05f, 0f);
+                if(HandTracking.HandUsed == 1)
+                {
+                    SolverHandler.AdditionalOffset = new Vector3(0.3f, -0.05f, 0f);
 
+                }
+                else
+                {
+                    SolverHandler.AdditionalOffset = new Vector3(-0.3f, -0.05f, 0f);
+                }
             }
-            else
-            {
-                SolverHandler.AdditionalOffset = new Vector3(-0.3f, -0.05f, 0f);
-            }
-        }
+        }    
+
 
     }
 

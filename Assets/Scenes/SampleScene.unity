@@ -12139,7 +12139,7 @@ MonoBehaviour:
   InstructionsBackPlate: {fileID: 1421903091}
   RepetitionsBackPlate: {fileID: 1996459888}
   RepetitionTextBox: {fileID: 96699738}
-  DashboardBackPlate: {fileID: 386034020}
+  StimDashBackPlate: {fileID: 386034020}
   StimulationVisualizerTarget: {fileID: 332225782}
   StatsPrompt: {fileID: 280376548}
 --- !u!114 &156346448
@@ -19067,8 +19067,8 @@ Transform:
   m_GameObject: {fileID: 280376543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7221915, z: 0}
-  m_LocalScale: {x: 1, y: 0.3444475, z: 1}
+  m_LocalPosition: {x: 0, y: -0.65, z: 0}
+  m_LocalScale: {x: 1, y: 0.29999998, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 319201544}
@@ -71538,30 +71538,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 353655003}
-          m_TargetAssemblyTypeName: DataManager, Assembly-CSharp
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1148895064}
-          m_TargetAssemblyTypeName: StimVisualPanel, Assembly-CSharp
-          m_MethodName: ScreenOn
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - keyword: Zoom In
     response:
       m_PersistentCalls:
@@ -72182,22 +72158,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - keyword: Dot
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1552418322}
-          m_TargetAssemblyTypeName: UDPSender, Assembly-CSharp
-          m_MethodName: Dot
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - keyword: Zero
     response:
       m_PersistentCalls:
@@ -72294,7 +72254,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - keyword: Start
+  - keyword: Start Stim
     response:
       m_PersistentCalls:
         m_Calls:
@@ -72325,30 +72285,6 @@ MonoBehaviour:
         - m_Target: {fileID: 1564128475}
           m_TargetAssemblyTypeName: TargetPosturePanel, Assembly-CSharp
           m_MethodName: TrialIterator
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 353655003}
-          m_TargetAssemblyTypeName: DataManager, Assembly-CSharp
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1148895064}
-          m_TargetAssemblyTypeName: StimVisualPanel, Assembly-CSharp
-          m_MethodName: ScreenOn
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -72689,66 +72625,6 @@ MonoBehaviour:
         - m_Target: {fileID: 353655001}
           m_TargetAssemblyTypeName: ProfileManager, Assembly-CSharp
           m_MethodName: ProfileNinetyNine
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - keyword: Reset Profile
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 353655001}
-          m_TargetAssemblyTypeName: ProfileManager, Assembly-CSharp
-          m_MethodName: ProfileReset
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 353655001}
-          m_TargetAssemblyTypeName: ProfileManager, Assembly-CSharp
-          m_MethodName: CancelLogin
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - keyword: Show Stim
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: StimVisualPanel, Assembly-CSharp
-          m_MethodName: ScreenOn
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - keyword: Hide Stim
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: StimVisualPanel, Assembly-CSharp
-          m_MethodName: ScreenOff
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -77078,6 +76954,7 @@ MonoBehaviour:
   HandTracking: {fileID: 239697152}
   SolverHandler: {fileID: 1148895067}
   TargetPosturePanel: {fileID: 1564128475}
+  UDPSender: {fileID: 1552418322}
 --- !u!114 &1148895067 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -1954203695318403912, guid: 478732197b53dee4694480aac1a7c98c, type: 3}
@@ -91468,7 +91345,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.075, z: 0.195}
-  m_LocalScale: {x: 0.17, y: 0.087096, z: 0.0028000001}
+  m_LocalScale: {x: 0.17, y: 0.1, z: 0.0028000001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 280376544}
@@ -99484,6 +99361,7 @@ MonoBehaviour:
   Profile_AmplitudesOutput: {fileID: 2056003927}
   NewAmplitudes: {fileID: 548819465}
   NewAmplitudesOutput: {fileID: 495221044}
+  InstructionsPromptOutput: {fileID: 1218439529}
   NormalBarFullRange: 0
   StimAmps: []
   InitialAmps: []
@@ -99502,19 +99380,24 @@ MonoBehaviour:
   avgIncrementer: 0
   ExternalMachineIP: 
   SendToExternal: 1
-  StopStimState: 0
+  StopStimState: 1
   TimerTextBox: {fileID: 156346447}
   Lateral: {fileID: 1854149556}
   ExtensionStimBackPlate: {fileID: 1986770918}
   TargetPosturePanel: {fileID: 1564128475}
   IPState: 0
+  ExtensionStimState: 0
   ConfigManager: {fileID: 353655004}
-  StimulationVisualizer: {fileID: 1680164316}
   StimulationVisualizerTarget: {fileID: 332225782}
   ProfileManager: {fileID: 353655001}
   DataManager: {fileID: 353655003}
   StatsPanel: {fileID: 1919306230}
   HandUsePrompt: {fileID: 541581724}
+  Timer: {fileID: 1011646863}
+  InstructionsBackPlate: {fileID: 1421903091}
+  RepetitionsBackPlate: {fileID: 1996459888}
+  RepetitionTextBox: {fileID: 96699738}
+  StimDashBackPlate: {fileID: 386034020}
 --- !u!4 &1552418323
 Transform:
   m_ObjectHideFlags: 0
@@ -100966,6 +100849,7 @@ MonoBehaviour:
   StimulationVisualizerTarget: {fileID: 332225782}
   StimDashBackPlate: {fileID: 386034020}
   StatsPrompt: {fileID: 280376548}
+  UDPSender: {fileID: 1552418322}
   ScreenIsOn: 0
   ScreenTime: 0
   ScreenPositionSetRight: 0
