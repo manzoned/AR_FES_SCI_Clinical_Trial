@@ -176,11 +176,16 @@ public class UDPSender : MonoBehaviour
     {
         if (StopStimState == false)
         {
+            if (ExtensionStimState == false)
+            {
+                DataManager.RecordCurrentRepData();
+                StatsPanel.UpdateCurrentSessionStats();
+            }
+
             StopStimState = true;
             ExtensionStimState = false;
             ExtensionStimBackPlate.gameObject.SetActive(false);
-            DataManager.RecordCurrentRepData();
-            StatsPanel.UpdateCurrentSessionStats();
+
         }
 
         manual_stim_offset = 0;
@@ -196,6 +201,11 @@ public class UDPSender : MonoBehaviour
         {
             //ExtensionStimBackPlate.gameObject.SetActive(true);
             //TimerTextBox.StopStim();
+            if (StopStimState == false)
+            {
+                DataManager.RecordCurrentRepData();
+                StatsPanel.UpdateCurrentSessionStats();
+            }
             StopStimState = false;
             ExtensionStimState = true;
             StimDashBackPlate.gameObject.SetActive(true);
@@ -293,17 +303,25 @@ public class UDPSender : MonoBehaviour
                 if (Lateral.GraspState == 1) // for lateral grasp, only turn on thumb stim if fingers sufficiently flexed
                 {
                     IndexKnuckleAngle = ErrorScoreScript.IndexKnuckleAngle;
-                    LateralIndexThreshold = (ErrorScoreScript.TargetIndexKnuckleAngle + (ErrorScoreScript.upperbound_error_finger + ErrorScoreScript.TargetIndexKnuckleAngle)) / 2f;
+                    // set threshold somewhere between full extension (180) and target angle
+                    //LateralIndexThreshold = (ErrorScoreScript.TargetIndexKnuckleAngle + (ErrorScoreScript.upperbound_error_finger + ErrorScoreScript.TargetIndexKnuckleAngle)) / 2f;
+                    LateralIndexThreshold = (ErrorScoreScript.TargetIndexKnuckleAngle + 180f) / 2f;
                     if (IndexKnuckleAngle > LateralIndexThreshold)
                     {
                         StimAmps[1] = -1f;
+                        thumb_Off_Textbox_Target.gameObject.SetActive(true);
+
                     }
-                    else { StimAmps[1] = ErrorScoreScript.ThumbStimAmp; }
-                    /*                    if (ErrorScoreScript.FingerStimAmp > 0.5)
-                                        {
-                                            StimAmps[1] = -1f;
-                                        }
-                                        else { StimAmps[1] = ErrorScoreScript.ThumbStimAmp; }*/
+                    else 
+                    { 
+                        StimAmps[1] = ErrorScoreScript.ThumbStimAmp;
+                        if (StimAmps[1] < normal_thumb_min) { StimAmps[1] = normal_thumb_min; }
+                        if (StimAmps[1] > 1) { StimAmps[1] = 1f; }
+                        thumb_Off_Textbox_Target.gameObject.SetActive(false);
+
+
+                    }
+
                 }
 
                 if (StopStimState == true)

@@ -1376,7 +1376,7 @@ public class ErrorScoreScript_v2 : MonoBehaviour
         {
             upperbound_error_thumb = 0.06f;
             //lowerbound_error_thumb = 0f;
-            lowerbound_error_thumb = -0.01f; 
+            lowerbound_error_thumb = 0f; 
             if (TipPinch.GraspState == 1)
             {
                 upperbound_error_finger = 40f;
@@ -1406,7 +1406,7 @@ public class ErrorScoreScript_v2 : MonoBehaviour
             {
                 upperbound_error_finger = 40f;
                 //lowerbound_error_thumb = 0.02f;
-                lowerbound_error_thumb = 0.01f;
+                lowerbound_error_thumb = 0f;
                 if (ThumbAlignmentDiff < lowerbound_error_thumb) // thumb tip will never be aligned with plane because thumb is resting on finger
                 {
                     ThumbStimAmp = 0;

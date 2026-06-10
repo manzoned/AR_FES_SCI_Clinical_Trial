@@ -33,6 +33,7 @@ public class TargetPosturePanel : MonoBehaviour
     public StimDashBackPlate StimDashBackPlate;
     public StatsPrompt StatsPrompt;
     public UDPSender UDPSender;
+    public DataManager DataManager;
     public int ScreenIsOn;
     public int ScreenTime;
     public int ScreenPositionSetRight;
@@ -294,6 +295,7 @@ public class TargetPosturePanel : MonoBehaviour
             if(ScreenIsOn == 1)
             {
                 TrialNumberController.trialCounter++;
+                //DataManager.RecordCurrentRepData();
                 if (TipPinch.GraspState == 1) 
                 { 
                     TrialNumberController.tipPinchCounter++;

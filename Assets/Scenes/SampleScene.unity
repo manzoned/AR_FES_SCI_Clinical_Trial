@@ -100865,6 +100865,7 @@ MonoBehaviour:
   StimDashBackPlate: {fileID: 386034020}
   StatsPrompt: {fileID: 280376548}
   UDPSender: {fileID: 1552418322}
+  DataManager: {fileID: 353655003}
   ScreenIsOn: 0
   ScreenTime: 0
   ScreenPositionSetRight: 0
